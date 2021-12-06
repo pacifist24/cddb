@@ -5,11 +5,11 @@ import { MAX_LV, MAX_RANK, MAX_STAR } from 'lib/gameConstants'
 import CharactersInputComponent from './presenter'
 
 const DEFAULT_CHARACTERS: Character[] = [
-  { name: '', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
-  { name: '', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
-  { name: '', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
-  { name: '', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
-  { name: '', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
+  { name: 'Character1', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
+  { name: 'Character2', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
+  { name: 'Character3', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
+  { name: 'Character4', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
+  { name: 'Character5', star: MAX_STAR, rank: MAX_RANK, lv: MAX_LV, comment: '', specialLv: 0 },
 ]
 
 const CharactersInput: VFC = () => {

@@ -20,7 +20,7 @@ const CharacterCommentInput: VFC<Props> = ({
       InputLabelProps={{
         shrink: true,
       }}
-      className="w-36"
+      className="w-48"
       value={comment}
       onChange={(e) => changeCharacterComment(e.target.value)}
       disabled={!isCharactersSelected}

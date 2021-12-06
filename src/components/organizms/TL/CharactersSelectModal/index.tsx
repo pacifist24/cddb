@@ -4,7 +4,7 @@ import { selectTL, selectCharacters, sanitizeUB } from 'ducks/tl'
 import { openAlert } from 'ducks/commonAlert'
 import { CHARACTERS_INFO, MAX_LV, MAX_RANK } from 'lib/gameConstants'
 import { getDefaultSpecialLv } from 'lib/util'
-import CharacterSelectModalComponent from './presenter'
+import Presenter from './presenter'
 
 type Props = {
   isOpen: boolean
@@ -67,7 +67,7 @@ const CharacterSelectModal: VFC<Props> = ({ isOpen, setIsOpen }) => {
   }
 
   return (
-    <CharacterSelectModalComponent
+    <Presenter
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       tempSelectedCharacters={tempSelectedCharacters}
