@@ -4,9 +4,14 @@ import { TextField } from '@mui/material'
 type Props = {
   comment: string
   changeCharacterComment: (comment: string) => void
+  isCharactersSelected: boolean
 }
 
-const CharacterCommentInput: VFC<Props> = ({ comment, changeCharacterComment }) => (
+const CharacterCommentInput: VFC<Props> = ({
+  comment,
+  changeCharacterComment,
+  isCharactersSelected,
+}) => (
   <div>
     <TextField
       label="装備状況等"
@@ -18,6 +23,7 @@ const CharacterCommentInput: VFC<Props> = ({ comment, changeCharacterComment }) 
       className="w-36"
       value={comment}
       onChange={(e) => changeCharacterComment(e.target.value)}
+      disabled={!isCharactersSelected}
     />
   </div>
 )

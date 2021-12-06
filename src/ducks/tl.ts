@@ -143,7 +143,7 @@ export const {
 } = slice.actions
 
 export const selectTL = (state: AppState): TLState => state.tl
-export const selectIsCharactersInputVisible = (state: AppState): boolean =>
+export const selectIsCharactersSelected = (state: AppState): boolean =>
   state.tl.characters.length === 5
 export const selectIsTLBasicDataInputVisible = (state: AppState): boolean =>
   state.tl.characters.length === 5

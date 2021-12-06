@@ -8,13 +8,11 @@ type Props = {
 
 const CharactersInput: VFC<Props> = ({ characters }) => (
   <>
-    {characters.length === 5 &&
-      Array.from(Array(5).keys()).map((index) => (
-        <div className="mt-2 ml-3">
-          <CharacterInput index={index} key={characters[index].name} />
-        </div>
-      ))}
-    a
+    {Array.from(Array(5).keys()).map((index) => (
+      <div className="mt-2 ml-5">
+        <CharacterInput index={index} character={characters[index]} key={characters[index].name} />
+      </div>
+    ))}
   </>
 )
 

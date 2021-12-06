@@ -27,15 +27,7 @@ module.exports = {
     project: './tsconfig.eslint.json',
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'import',
-    'jsx-a11y',
-    'prefer-arrow',
-    'react',
-    'react-hooks',
-    'prettier',
-  ],
+  plugins: ['@typescript-eslint', 'import', 'jsx-a11y', 'prefer-arrow', 'react', 'react-hooks'],
   root: true,
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -51,6 +43,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     '@typescript-eslint/no-unused-vars': [
       2,
       {
