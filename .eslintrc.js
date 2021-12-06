@@ -34,6 +34,7 @@ module.exports = {
     'prefer-arrow',
     'react',
     'react-hooks',
+    'prettier',
   ],
   root: true,
   rules: {
