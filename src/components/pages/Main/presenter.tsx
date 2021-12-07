@@ -1,4 +1,6 @@
 import { VFC } from 'react'
+import SplitPane from 'react-split-pane'
+import Pane from 'react-split-pane/lib/Pane'
 import Sidebar from 'components/templates/Sidebar'
 import TL from 'components/templates/TL'
 import { ContentType } from 'ducks/main'
@@ -9,14 +11,16 @@ type Props = {
 }
 
 const Main: VFC<Props> = ({ displayedContent }) => (
-  <div className="flex w-screen h-screen">
-    <div className="w-64 border">
-      <Sidebar />
-    </div>
-    <div className="flex-1 border">{displayedContent === 'tl' && <TL />}</div>
-    <div className="border w-72">right</div>
+  <>
+    <SplitPane split="vertical">
+      <Pane initialSize="240px">
+        <Sidebar />
+      </Pane>
+      <Pane initialSize="500px">{displayedContent === 'tl' && <TL />}</Pane>
+      <Pane>right</Pane>
+    </SplitPane>
     <CommonAlert />
-  </div>
+  </>
 )
 
 export default Main
