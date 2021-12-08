@@ -10,12 +10,12 @@ import UBsInput from 'components/organizms/TL/UBsInput'
 
 const Presenter: VFC = () => (
   <Column>
-    <div className="mt-5 ml-5">
+    <div className="pb-5 mt-5 ml-5">
       <CharactersSelectButton />
       <div className="mt-5">
         <CharactersInput />
       </div>
-      <div className="flex mt-8">
+      <div className="flex mt-12">
         <PhaseInput />
         <BossNameInput />
       </div>
@@ -25,7 +25,9 @@ const Presenter: VFC = () => (
       <div className="mt-3">
         <CommentInput />
       </div>
-      <UBsInput />
+      <div className="mt-5">
+        <UBsInput />
+      </div>
     </div>
   </Column>
 )

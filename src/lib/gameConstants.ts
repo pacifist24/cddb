@@ -1,9 +1,9 @@
-export const MAX_RANK = 22;
-export const MAX_LV = 211;
-export const MAX_SPECIAL_LV = 220;
-export const MAX_STAR = 6;
-export const MAX_PHASE = 5;
-export const MAX_DAMAGE = 999999999;
+export const MAX_RANK = 22
+export const MAX_LV = 211
+export const MAX_SPECIAL_LV = 220
+export const MAX_STAR = 6
+export const MAX_PHASE = 5
+export const MAX_DAMAGE = 999999999
 
 export const BOSSES_INFO = {
   アクアリオス: {},
@@ -42,15 +42,15 @@ export const BOSSES_INFO = {
   レサトパルト: {},
   ワイバーン: {},
   ワイルドグリフォン: {},
-};
+}
 
 export const CHARACTERS_INFO: {
   [key: string]: {
-    maxStar: number;
-    position: number;
-    hasSpecial: boolean;
-    defaultShortName?: string;
-  };
+    maxStar: number
+    position: number
+    hasSpecial: boolean
+    defaultShortName?: string
+  }
 } = {
   リマ: {
     maxStar: 6,
@@ -985,7 +985,7 @@ export const CHARACTERS_INFO: {
     hasSpecial: true,
     defaultShortName: 'ハロキョ',
   },
-};
+}
 
 // console.log(JSON.stringify(CHARACTERS_INFO));
 // console.log(Object.keys(CHARACTERS_INFO).length);

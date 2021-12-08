@@ -1,10 +1,6 @@
 import { VFC } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import {
-  changeDisplayedContent,
-  selectDisplayedContent,
-  ContentType,
-} from 'ducks/main'
+import { changeDisplayedContent, selectDisplayedContent, ContentType } from 'ducks/main'
 import Presenter from './presenter'
 
 const Sidebar: VFC = () => {
