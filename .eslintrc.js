@@ -44,6 +44,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'prefer-destructuring': 'off',
     '@typescript-eslint/no-unused-vars': [
       2,
       {

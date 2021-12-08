@@ -31,7 +31,7 @@ const parseTlData = (text: string): TLState | null => {
     } else {
       return null
     }
-    ;[tlData.bossName] = [line[2]]
+    tlData.bossName = line[2]
   } else {
     return null
   }
