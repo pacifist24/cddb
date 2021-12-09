@@ -27,6 +27,9 @@ export type TLState = {
   characters: Character[]
   timeline: UB[]
   comment: string
+  tlId: string | null
+  userId: string | null
+  updateDate: Date | null
 }
 
 const initialState: TLState = {
@@ -38,6 +41,9 @@ const initialState: TLState = {
   characters: [],
   timeline: [],
   comment: '',
+  tlId: null,
+  userId: null,
+  updateDate: null,
 }
 
 export const slice = createSlice({
@@ -92,6 +98,9 @@ export const slice = createSlice({
     changeUBComment: (state, action: PayloadAction<{ index: number; value: string }>) => {
       state.timeline[action.payload.index].comment = action.payload.value
     },
+    changeTLId: (state, action: PayloadAction<string>) => {
+      state.tlId = action.payload
+    },
     addUB: (state, action: PayloadAction<{ index: number; ub: UB }>) => {
       state.timeline.splice(action.payload.index, 0, action.payload.ub)
     },
@@ -115,6 +124,23 @@ export const slice = createSlice({
       state.phase = action.payload.phase
       state.startTime = action.payload.startTime
       state.endTime = action.payload.endTime
+      state.tlId = action.payload.tlId
+      state.userId = action.payload.userId
+      state.updateDate = action.payload.updateDate
+    },
+    initializeTL: (state) => {
+      state.bossName = initialState.bossName
+      state.characters = initialState.characters
+      state.comment = initialState.comment
+      state.damage = initialState.damage
+      state.endTime = initialState.endTime
+      state.timeline = initialState.timeline
+      state.phase = initialState.phase
+      state.startTime = initialState.startTime
+      state.endTime = initialState.endTime
+      state.tlId = initialState.tlId
+      state.userId = initialState.userId
+      state.updateDate = initialState.updateDate
     },
   },
 })
@@ -135,11 +161,13 @@ export const {
   changeUBTime,
   changeUBName,
   changeUBComment,
+  changeTLId,
   addUB,
   deleteUB,
   selectCharacters,
   sanitizeUB,
   loadTL,
+  initializeTL,
 } = slice.actions
 
 export const selectTL = (state: AppState): TLState => state.tl
@@ -149,4 +177,5 @@ export const selectIsTLBasicDataInputVisible = (state: AppState): boolean =>
   state.tl.characters.length === 5
 export const selectIsUBsInputVisible = (state: AppState): boolean =>
   state.tl.bossName !== '' && state.tl.characters.length === 5
+export const selectHasTlId = (state: AppState): boolean => state.tl.tlId != null
 export default slice.reducer

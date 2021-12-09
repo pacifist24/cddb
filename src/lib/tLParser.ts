@@ -1,5 +1,5 @@
 import { TLState } from 'ducks/tl'
-import { timeStr2Num, getDefaultSpecialLv } from 'lib/util'
+import { timeStr2Num, getDefaultSpecialLv, generateTLId } from 'lib/util'
 import { CHARACTERS_INFO } from 'lib/gameConstants'
 
 // プリコネのTL書き出し機能により出力された文字列から情報を抜き出す
@@ -20,6 +20,7 @@ const parseTlData = (text: string): TLState | null => {
   }
   const lineReader = generateLineReader()
   const tlData: TLState = <TLState>{}
+  tlData.tlId = generateTLId()
   tlData.comment = ''
 
   // 1行目

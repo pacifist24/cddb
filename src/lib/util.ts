@@ -69,3 +69,14 @@ export const makePaddedNameList = (
 
   return resultList
 }
+
+/** length桁のランダム文字列を生成する（セキュアではない） */
+export const generateRandomStr = (length: number): string => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  return Array.from(Array(length))
+    .map(() => chars[Math.floor(Math.random() * chars.length)])
+    .join('')
+}
+
+/** tlIdを生成（セキュアではない） */
+export const generateTLId = (): string => generateRandomStr(16)

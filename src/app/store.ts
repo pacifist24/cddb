@@ -3,7 +3,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import mainReducer from 'ducks/main'
 import tlReducer from 'ducks/tl'
 import commonAlertReducer from 'ducks/commonAlert'
-import styleRedicer from 'ducks/style'
+import styleReducer from 'ducks/style'
+import favsReducer from 'ducks/favs'
 
 const makeStore = () =>
   configureStore({
@@ -11,7 +12,8 @@ const makeStore = () =>
       main: mainReducer,
       tl: tlReducer,
       commonAlert: commonAlertReducer,
-      style: styleRedicer,
+      style: styleReducer,
+      favs: favsReducer,
     },
   })
 

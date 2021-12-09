@@ -1,12 +1,9 @@
 import { VFC } from 'react'
 import { Button } from '@mui/material'
-import CharactersSelectModal from 'components/organizms/TL/CharactersSelectModal'
 import CommonDialog from 'components/atoms/CommonDialog'
 
 type Props = {
   onClick: () => void
-  isCharactersSelectModalOpen: boolean
-  setIsCharactersSelectModalOpen: (val: boolean) => void
   onDialogClose: () => void
   dialogButtons: {
     label: string
@@ -16,10 +13,8 @@ type Props = {
   setIsDialogOpen: (val: boolean) => void
 }
 
-const CharactersSelectButton: VFC<Props> = ({
+const SaveTLToFavsButton: VFC<Props> = ({
   onClick,
-  isCharactersSelectModalOpen,
-  setIsCharactersSelectModalOpen,
   onDialogClose,
   dialogButtons,
   isDialogOpen,
@@ -27,15 +22,11 @@ const CharactersSelectButton: VFC<Props> = ({
 }) => (
   <>
     <Button variant="contained" color="primary" onClick={onClick}>
-      編成選択
+      お気に入りにTLを保存
     </Button>
-    <CharactersSelectModal
-      isOpen={isCharactersSelectModalOpen}
-      setIsOpen={setIsCharactersSelectModalOpen}
-    />
     <CommonDialog
-      title="キャラクター選択"
-      text="選択されているキャラクターを変更した場合、今までの入力は全て破棄されますがよろしいですか？"
+      title="上書き保存確認"
+      text="お気に入りに既に同一IDのTLが存在します、上書き保存しますか？"
       buttons={dialogButtons}
       setIsOpen={setIsDialogOpen}
       isOpen={isDialogOpen}
@@ -44,4 +35,4 @@ const CharactersSelectButton: VFC<Props> = ({
   </>
 )
 
-export default CharactersSelectButton
+export default SaveTLToFavsButton
