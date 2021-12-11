@@ -5,6 +5,7 @@ import Sidebar from 'components/templates/Sidebar'
 import CharacterNameConverter from 'components/templates/CharacterNameConverter'
 import TL from 'components/templates/TL'
 import Config from 'components/templates/Config'
+import Favs from 'components/templates/Favs'
 import TLOutputText from 'components/templates/TLOutputText'
 import { ContentType } from 'ducks/main'
 import CommonAlert from 'components/atoms/CommonAlert'
@@ -23,6 +24,7 @@ const Main: VFC<Props> = ({ displayedContent }) => (
         {displayedContent === 'tl' && <TL />}
         {displayedContent === 'config' && <Config />}
         {displayedContent === 'name' && <CharacterNameConverter />}
+        {displayedContent === 'favs' && <Favs />}
       </Pane>
       <Pane>
         <TLOutputText />

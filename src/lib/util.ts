@@ -80,3 +80,26 @@ export const generateRandomStr = (length: number): string => {
 
 /** tlIdを生成（セキュアではない） */
 export const generateTLId = (): string => generateRandomStr(16)
+
+/** twitter風にfromとtoの時間差を文字列にして返す */
+export const calcDiffDate = (from: Date, to = new Date()): string => {
+  const diff = to.getTime() - from.getTime()
+  const elapsed = new Date(diff)
+  // 大きい単位から順に表示
+  if (elapsed.getUTCFullYear() - 1970) {
+    return `${elapsed.getUTCFullYear() - 1970}年前`
+  }
+  if (elapsed.getUTCMonth()) {
+    return `${elapsed.getUTCMonth()}ヶ月前`
+  }
+  if (elapsed.getUTCDate() - 1) {
+    return `${elapsed.getUTCDate() - 1}日前`
+  }
+  if (elapsed.getUTCHours()) {
+    return `${elapsed.getUTCHours()}時間前`
+  }
+  if (elapsed.getUTCMinutes()) {
+    return `${elapsed.getUTCMinutes()}分前`
+  }
+  return `${elapsed.getUTCSeconds()}秒前`
+}

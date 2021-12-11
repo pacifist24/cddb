@@ -21,6 +21,10 @@ const parseTlData = (text: string): TLState | null => {
   const lineReader = generateLineReader()
   const tlData: TLState = <TLState>{}
   tlData.tlId = generateTLId()
+  tlData.accidentRate = 0
+  tlData.operation = 'manual'
+  tlData.difficulty = 'mid'
+  tlData.requireTool = false
   tlData.comment = ''
 
   // 1行目

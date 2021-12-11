@@ -1,14 +1,22 @@
 import { FC, useState } from 'react'
-import { Button, Menu, MenuItem } from '@mui/material'
+import { Menu, MenuItem, PopoverOrigin } from '@mui/material'
 
 type Props = {
   menuItems: {
     title: string
     func: () => void
   }[]
+  anchorOrigin: PopoverOrigin
 }
 
-const CommonMenu: FC<Props> = ({ menuItems, children }) => {
+const CommonMenu: FC<Props> = ({
+  menuItems,
+  children,
+  anchorOrigin = {
+    vertical: 'top',
+    horizontal: 'right',
+  },
+}) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClose = () => {
@@ -16,22 +24,21 @@ const CommonMenu: FC<Props> = ({ menuItems, children }) => {
   }
 
   return (
-    <div>
-      <Button
+    <>
+      <button
         style={{ minWidth: '0px' }}
-        id="basic-button"
-        aria-controls="basic-menu"
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        className="block"
+        type="button"
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           setAnchorEl(event.currentTarget)
         }}
       >
         {children}
-      </Button>
+      </button>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
+        anchorOrigin={anchorOrigin}
         open={open}
         onClose={() => setAnchorEl(null)}
         MenuListProps={{
@@ -51,7 +58,7 @@ const CommonMenu: FC<Props> = ({ menuItems, children }) => {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </>
   )
 }
 

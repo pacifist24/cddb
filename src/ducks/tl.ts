@@ -18,6 +18,9 @@ export type UB = {
   comment: string
 }
 
+export type OperationType = 'fullAuto' | 'semiAuto' | 'manual'
+export type DifficultyType = 'low' | 'mid' | 'high'
+
 export type TLState = {
   phase: number
   damage: number
@@ -29,7 +32,11 @@ export type TLState = {
   comment: string
   tlId: string | null
   userId: string | null
-  updateDate: Date | null
+  updateDateUTC: number | null
+  accidentRate: number
+  operation: OperationType
+  difficulty: DifficultyType
+  requireTool: boolean
 }
 
 const initialState: TLState = {
@@ -43,13 +50,29 @@ const initialState: TLState = {
   comment: '',
   tlId: null,
   userId: null,
-  updateDate: null,
+  updateDateUTC: null,
+  accidentRate: 0,
+  operation: 'manual',
+  difficulty: 'mid',
+  requireTool: false,
 }
 
 export const slice = createSlice({
   name: 'tl',
   initialState,
   reducers: {
+    changeAccidentRate: (state, action: PayloadAction<number>) => {
+      state.accidentRate = action.payload
+    },
+    changeOperation: (state, action: PayloadAction<OperationType>) => {
+      state.operation = action.payload
+    },
+    changeDifficulty: (state, action: PayloadAction<DifficultyType>) => {
+      state.difficulty = action.payload
+    },
+    changeRequireTool: (state, action: PayloadAction<boolean>) => {
+      state.requireTool = action.payload
+    },
     changePhase: (state, action: PayloadAction<number>) => {
       state.phase = action.payload
     },
@@ -126,7 +149,11 @@ export const slice = createSlice({
       state.endTime = action.payload.endTime
       state.tlId = action.payload.tlId
       state.userId = action.payload.userId
-      state.updateDate = action.payload.updateDate
+      state.updateDateUTC = action.payload.updateDateUTC
+      state.accidentRate = action.payload.accidentRate
+      state.operation = action.payload.operation
+      state.difficulty = action.payload.difficulty
+      state.requireTool = action.payload.requireTool
     },
     initializeTL: (state) => {
       state.bossName = initialState.bossName
@@ -140,7 +167,11 @@ export const slice = createSlice({
       state.endTime = initialState.endTime
       state.tlId = initialState.tlId
       state.userId = initialState.userId
-      state.updateDate = initialState.updateDate
+      state.updateDateUTC = initialState.updateDateUTC
+      state.accidentRate = initialState.accidentRate
+      state.operation = initialState.operation
+      state.difficulty = initialState.difficulty
+      state.requireTool = initialState.requireTool
     },
   },
 })
@@ -168,6 +199,10 @@ export const {
   sanitizeUB,
   loadTL,
   initializeTL,
+  changeAccidentRate,
+  changeOperation,
+  changeDifficulty,
+  changeRequireTool,
 } = slice.actions
 
 export const selectTL = (state: AppState): TLState => state.tl
@@ -178,4 +213,5 @@ export const selectIsTLBasicDataInputVisible = (state: AppState): boolean =>
 export const selectIsUBsInputVisible = (state: AppState): boolean =>
   state.tl.bossName !== '' && state.tl.characters.length === 5
 export const selectHasTlId = (state: AppState): boolean => state.tl.tlId != null
+export const selectTimestamp = (state: AppState): Date => new Date(state.tl.updateDateUTC)
 export default slice.reducer

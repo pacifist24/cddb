@@ -9,6 +9,9 @@ import DamageInput from 'components/organizms/TL/DamageInput'
 import CommentInput from 'components/organizms/TL/CommentInput'
 import UBsInput from 'components/organizms/TL/UBsInput'
 import SaveTLToFavsButton from 'components/organizms/TL/SaveTLToFavsButton'
+import AccidentRateInput from 'components/organizms/TL/AccidentRateInput'
+import DifficultyInput from 'components/organizms/TL/DifficultyInput'
+import OperationTypeInput from 'components/organizms/TL/OperationTypeInput'
 
 const Presenter: VFC = () => (
   <Column>
@@ -26,13 +29,22 @@ const Presenter: VFC = () => (
         <PhaseInput />
         <BossNameInput />
       </div>
-      <div className="mt-5">
+      <div className="flex mt-6">
+        <div className="mr-2">
+          <OperationTypeInput />
+        </div>
         <DamageInput />
+      </div>
+      <div className="flex mt-6">
+        <div className="mr-2">
+          <DifficultyInput />
+        </div>
+        <AccidentRateInput />
       </div>
       <div className="mt-3">
         <CommentInput />
       </div>
-      <div className="mt-5">
+      <div className="mt-6">
         <UBsInput />
       </div>
       <div>

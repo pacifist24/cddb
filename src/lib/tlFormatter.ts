@@ -85,7 +85,7 @@ const formatTL = (
 
   const lessTime = tlData.startTime - startTime
   tlTextLines.push(`<${timeNum2Str(tlData.startTime - lessTime).substr(1)} バトル開始>`)
-
+  tlTextLines.push('　')
   if (arrange === 'none') {
     for (let i = 0; i < tlData.timeline.length; i += 1) {
       const line = tlData.timeline[i]
@@ -136,17 +136,18 @@ const formatTL = (
             break
           }
         }
+
         if (arrange === 'same') {
           tlTextLines.push(
             `${timeNum2Str(line.time - lessTime).substr(1)} ${
               nameConversionTable[line.name] ?? line.name
-            }${subNames} ${line.comment}`,
+            }${subNames} ${line.comment ? '[' : ''}${line.comment}${line.comment ? ']' : ''}`,
           )
         } else {
           tlTextLines.push(
             `${timeNum2Str(line.time - lessTime).substr(1)} ${
               nameConversionTable[line.name] ?? line.name
-            } ${line.comment}`,
+            } ${line.comment ? '[' : ''}${line.comment}${line.comment ? ']' : ''}`,
           )
           if (subNames !== '') {
             tlTextLines.push(`⇒${subNames}`)
@@ -167,6 +168,7 @@ const formatTL = (
   //     }`;
   //   }),
   // );
+  tlTextLines.push('　')
   tlTextLines.push(
     `<${timeNum2Str(tlData.endTime - lessTime > 0 ? tlData.endTime - lessTime : 0).substr(
       1,

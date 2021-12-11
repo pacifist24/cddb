@@ -1,24 +1,18 @@
 import { VFC } from 'react'
 import { User } from 'firebase/auth'
-import { logout } from 'lib/auth'
-import { Button, Menu, MenuItem } from '@mui/material'
+import CommonMenu from 'components/atoms/CommonMenu'
 
 type Props = {
   user: User
-  open: boolean
-  handleClose: () => void
-  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  anchorEl: HTMLElement
+  menuItems: {
+    title: string
+    func: () => void
+  }[]
 }
 
-const UserProfileButton: VFC<Props> = ({ user, open, handleClose, handleOpen, anchorEl }) => (
-  <>
-    <Button
-      style={{ borderRadius: '9999px', padding: '10px' }}
-      onClick={handleOpen}
-      aria-expanded={open ? 'true' : undefined}
-      className="hover:bg-gray-200"
-    >
+const UserProfileButton: VFC<Props> = ({ user, menuItems }) => (
+  <CommonMenu menuItems={menuItems} anchorOrigin={undefined}>
+    <div className="flex items-center p-3 rounded-full hover:bg-gray-200">
       <img src={user.photoURL} alt={user.displayName} className="w-10 h-10 rounded-full" />
       <span className="ml-3 font-bold text-gray-800">{user.displayName}</span>
       <span className="ml-5 text-gray-800">
@@ -37,31 +31,8 @@ const UserProfileButton: VFC<Props> = ({ user, open, handleClose, handleOpen, an
           />
         </svg>
       </span>
-    </Button>
-    <Menu
-      id="basic-menu"
-      open={open}
-      onClose={handleClose}
-      MenuListProps={{
-        'aria-labelledby': 'basic-button',
-      }}
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <MenuItem
-        dense
-        onClick={async () => {
-          await logout()
-          handleClose()
-        }}
-      >
-        ログアウトする
-      </MenuItem>
-    </Menu>
-  </>
+    </div>
+  </CommonMenu>
 )
 
 export default UserProfileButton

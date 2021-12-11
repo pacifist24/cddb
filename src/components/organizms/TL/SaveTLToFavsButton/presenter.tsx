@@ -22,7 +22,7 @@ const SaveTLToFavsButton: VFC<Props> = ({
 }) => (
   <>
     <Button variant="contained" color="primary" onClick={onClick}>
-      お気に入りにTLを保存
+      お気に入り（ローカル）にTLを保存
     </Button>
     <CommonDialog
       title="上書き保存確認"

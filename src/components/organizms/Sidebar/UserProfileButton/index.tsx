@@ -1,5 +1,6 @@
-import { VFC, useState } from 'react'
+import { VFC } from 'react'
 import { User } from 'firebase/auth'
+import { logout } from 'lib/auth'
 import Presenter from './presenter'
 
 type Props = {
@@ -7,24 +8,16 @@ type Props = {
 }
 
 const UserProfileButton: VFC<Props> = ({ user }) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-  const handleOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setAnchorEl(event.currentTarget)
-  }
+  const menuItems = [
+    {
+      title: 'ログアウトする',
+      func: async () => {
+        await logout()
+      },
+    },
+  ]
 
-  return (
-    <Presenter
-      user={user}
-      open={open}
-      handleClose={handleClose}
-      handleOpen={handleOpen}
-      anchorEl={anchorEl}
-    />
-  )
+  return <Presenter user={user} menuItems={menuItems} />
 }
 
 export default UserProfileButton

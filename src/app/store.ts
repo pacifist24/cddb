@@ -12,8 +12,8 @@ const makeStore = () =>
       main: mainReducer,
       tl: tlReducer,
       commonAlert: commonAlertReducer,
-      style: styleReducer,
       favs: favsReducer,
+      style: styleReducer,
     },
   })
 

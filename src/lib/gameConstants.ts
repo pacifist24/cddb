@@ -748,7 +748,7 @@ export const CHARACTERS_INFO: {
   'キャル（ニューイヤー）': {
     maxStar: 5,
     position: 690,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'ニャル',
   },
   'ミオ（デレマス）': {
