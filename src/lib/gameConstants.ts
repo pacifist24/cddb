@@ -4,6 +4,7 @@ export const MAX_SPECIAL_LV = 220
 export const MAX_STAR = 6
 export const MAX_PHASE = 5
 export const MAX_DAMAGE = 999999999
+export const FULL_BATTLE_TIME = 90
 
 export const BOSSES_INFO = {
   アクアリオス: {},

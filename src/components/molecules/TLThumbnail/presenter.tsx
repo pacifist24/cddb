@@ -2,6 +2,7 @@ import { VFC } from 'react'
 import { TLState } from 'ducks/tl'
 import CommonMenu from 'components/atoms/CommonMenu'
 import { calcDiffDate } from 'lib/util'
+import { FULL_BATTLE_TIME } from 'lib/gameConstants'
 import PhaseChip from './PhaseChip'
 import OperationTypeChip from './OperationTypeChip'
 
@@ -25,10 +26,12 @@ const TLThumbnail: VFC<Props> = ({ tl, menuItems = [] }) => (
       <div className="flex flex-col">
         <div className="flex items-center pl-1 font-bold">
           {`${tl.damage}万`}
-          {/* {tl.accidentRate !== 0 && (
-            <div className="ml-1 font-bold">{`(事故率${tl.accidentRate}％)`}</div>
-          )} */}
-          <div className="ml-1 text-sm">{`(${calcDiffDate(new Date(tl.updateDateUTC))})`}</div>
+          {tl.startTime - tl.endTime !== FULL_BATTLE_TIME && (
+            <div className="ml-1 font-bold">{`(${tl.startTime - tl.endTime}秒)`}</div>
+          )}
+          <div className="ml-1 text-sm font-normal">
+            {`- ${calcDiffDate(new Date(tl.updateDateUTC))}`}
+          </div>
         </div>
 
         <div className="flex">

@@ -10,36 +10,43 @@ import {
 
 type Props = {
   title: string
-  text: string
+  description: string
   onClose: () => void
   buttons: {
     label: string
     handleClick: () => void
   }[]
   isOpen: boolean
-  setIsOpen: (val: boolean) => void
+  closeDialog: () => void
 }
 
-const CommonDialog: VFC<Props> = ({ title, text, buttons, isOpen, setIsOpen, onClose }) => (
+const CommonDialog: VFC<Props> = ({
+  title,
+  description,
+  buttons,
+  isOpen,
+  closeDialog,
+  onClose,
+}) => (
   <div>
     <Dialog
       open={isOpen}
       onClose={() => {
         onClose()
-        setIsOpen(false)
+        closeDialog()
       }}
       aria-labelledby="form-dialog-title2"
     >
       <DialogTitle id="form-dialog-title2">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{text}</DialogContentText>
+        <DialogContentText>{description}</DialogContentText>
       </DialogContent>
       <DialogActions>
         {buttons.map((button) => (
           <Button
             onClick={() => {
               button.handleClick()
-              setIsOpen(false)
+              closeDialog()
             }}
             key={button.label}
             color="primary"

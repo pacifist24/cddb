@@ -1,5 +1,6 @@
 import { VFC, useState } from 'react'
 import { selectHasTlId, initializeTL, changeTLId } from 'ducks/tl'
+import { openDialog } from 'ducks/commonDialog'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { generateTLId } from 'lib/util'
 import Presenter from './presenter'
@@ -8,7 +9,6 @@ const CharactersSelectButton: VFC = () => {
   const dispatch = useAppDispatch()
   const hasId = useAppSelector(selectHasTlId)
   const [isCharactersSelectModalOpen, setIsCharactersSelectModalOpen] = useState(false)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const buttons = [
     {
       label: 'キャンセル',
@@ -27,7 +27,15 @@ const CharactersSelectButton: VFC = () => {
   const onClick = () => {
     if (hasId) {
       // 既に入力がある場合（TLIDの存在で判断）は確認のダイアログを開く
-      setIsDialogOpen(true)
+      dispatch(
+        openDialog({
+          title: 'キャラクター選択',
+          description:
+            '選択されているキャラクターを変更した場合、今までの入力は全て破棄されますがよろしいですか？',
+          buttons,
+          onClose: () => undefined,
+        }),
+      )
     } else {
       // 未入力の場合はTLIDを生成後、確認無しでキャラ選択モダルを開く
       dispatch(changeTLId(generateTLId()))
@@ -40,10 +48,6 @@ const CharactersSelectButton: VFC = () => {
       onClick={onClick}
       setIsCharactersSelectModalOpen={setIsCharactersSelectModalOpen}
       isCharactersSelectModalOpen={isCharactersSelectModalOpen}
-      onDialogClose={() => undefined}
-      dialogButtons={buttons}
-      isDialogOpen={isDialogOpen}
-      setIsDialogOpen={setIsDialogOpen}
     />
   )
 }

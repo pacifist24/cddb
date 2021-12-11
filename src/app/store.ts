@@ -5,6 +5,7 @@ import tlReducer from 'ducks/tl'
 import commonAlertReducer from 'ducks/commonAlert'
 import styleReducer from 'ducks/style'
 import favsReducer from 'ducks/favs'
+import commonDialogReducer from 'ducks/commonDialog'
 
 const makeStore = () =>
   configureStore({
@@ -14,6 +15,7 @@ const makeStore = () =>
       commonAlert: commonAlertReducer,
       favs: favsReducer,
       style: styleReducer,
+      commonDialog: commonDialogReducer,
     },
   })
 

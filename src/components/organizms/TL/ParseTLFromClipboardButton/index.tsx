@@ -1,18 +1,13 @@
-import { VFC, useState } from 'react'
+import { VFC } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { loadTL, selectHasTlId } from 'ducks/tl'
 import { changeStartTime } from 'ducks/style'
 import { openAlert } from 'ducks/commonAlert'
 import parseTlData from 'lib/tLParser'
+import { openDialog } from 'ducks/commonDialog'
 import Presenter from './presenter'
 
 const ParseTLFromClipboardButton: VFC = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const title = 'クリップボードからTLを読み込み'
-  const text =
-    'クリップボードからTLを読み込んだ場合、今までの入力は全て破棄されますがよろしいですか？'
-  const onClose = () => undefined
-
   const dispatch = useAppDispatch()
   const handleClickOK = () => {
     navigator.clipboard
@@ -53,22 +48,20 @@ const ParseTLFromClipboardButton: VFC = () => {
   const hasId = useAppSelector(selectHasTlId)
   const onClick = () => {
     if (hasId) {
-      setIsDialogOpen(true)
+      dispatch(
+        openDialog({
+          title: 'クリップボードからTLを読み込み',
+          description:
+            'クリップボードからTLを読み込んだ場合、今までの入力は全て破棄されますがよろしいですか？',
+          buttons,
+          onClose: () => undefined,
+        }),
+      )
     } else {
       handleClickOK()
     }
   }
 
-  return (
-    <Presenter
-      title={title}
-      text={text}
-      buttons={buttons}
-      setIsOpen={setIsDialogOpen}
-      isOpen={isDialogOpen}
-      onClose={onClose}
-      onClick={onClick}
-    />
-  )
+  return <Presenter onClick={onClick} />
 }
 export default ParseTLFromClipboardButton
