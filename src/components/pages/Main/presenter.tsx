@@ -8,30 +8,26 @@ import Config from 'components/templates/Config'
 import Favs from 'components/templates/Favs'
 import TLOutputText from 'components/templates/TLOutputText'
 import { ContentType } from 'ducks/main'
-import CommonAlert from 'components/atoms/CommonAlert'
 
 type Props = {
   displayedContent: ContentType
 }
 
 const Main: VFC<Props> = ({ displayedContent }) => (
-  <>
-    <SplitPane split="vertical">
-      <Pane initialSize="240px">
-        <Sidebar />
-      </Pane>
-      <Pane initialSize="520px">
-        {displayedContent === 'tl' && <TL />}
-        {displayedContent === 'config' && <Config />}
-        {displayedContent === 'name' && <CharacterNameConverter />}
-        {displayedContent === 'favs' && <Favs />}
-      </Pane>
-      <Pane>
-        <TLOutputText />
-      </Pane>
-    </SplitPane>
-    <CommonAlert />
-  </>
+  <SplitPane split="vertical">
+    <Pane initialSize="240px">
+      <Sidebar />
+    </Pane>
+    <Pane initialSize="520px">
+      {displayedContent === 'tl' && <TL />}
+      {displayedContent === 'config' && <Config />}
+      {displayedContent === 'name' && <CharacterNameConverter />}
+      {displayedContent === 'favs' && <Favs />}
+    </Pane>
+    <Pane>
+      <TLOutputText />
+    </Pane>
+  </SplitPane>
 )
 
 export default Main

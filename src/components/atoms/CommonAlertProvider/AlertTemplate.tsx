@@ -1,14 +1,24 @@
 import { VFC } from 'react'
-import { CommonAlertState } from 'ducks/commonAlert'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
+
+export type CommonAlertState = {
+  isOpen: boolean
+  message: string
+  anchorOrigin: {
+    vertical: 'bottom' | 'top'
+    horizontal: 'center' | 'left' | 'right'
+  }
+  severity: 'error' | 'info' | 'success' | 'warning'
+  duration: number
+}
 
 type Props = {
   commonAlertState: CommonAlertState
   handleClose: () => void
 }
 
-const CommonAlert: VFC<Props> = ({ commonAlertState, handleClose }) => (
+const AlertTemplate: VFC<Props> = ({ commonAlertState, handleClose }) => (
   <Snackbar
     open={commonAlertState.isOpen}
     autoHideDuration={commonAlertState.duration}
@@ -21,4 +31,4 @@ const CommonAlert: VFC<Props> = ({ commonAlertState, handleClose }) => (
   </Snackbar>
 )
 
-export default CommonAlert
+export default AlertTemplate

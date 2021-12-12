@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import mainReducer from 'ducks/main'
 import tlReducer from 'ducks/tl'
-import commonAlertReducer from 'ducks/commonAlert'
 import styleReducer from 'ducks/style'
 import favsReducer from 'ducks/favs'
 
@@ -11,7 +10,6 @@ const makeStore = () =>
     reducer: {
       main: mainReducer,
       tl: tlReducer,
-      commonAlert: commonAlertReducer,
       favs: favsReducer,
       style: styleReducer,
     },

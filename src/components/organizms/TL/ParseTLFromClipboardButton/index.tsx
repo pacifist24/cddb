@@ -2,7 +2,7 @@ import { VFC } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { loadTL, selectHasTlId } from 'ducks/tl'
 import { changeStartTime } from 'ducks/style'
-import { openAlert } from 'ducks/commonAlert'
+import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import parseTlData from 'lib/tLParser'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import Presenter from './presenter'
@@ -10,6 +10,7 @@ import Presenter from './presenter'
 const ParseTLFromClipboardButton: VFC = () => {
   const dispatch = useAppDispatch()
   const openDialog = useCommonDialogContext()
+  const openAlert = useCommonAlertContext()
   const handleClickOK = () => {
     navigator.clipboard
       .readText()
@@ -19,17 +20,15 @@ const ParseTLFromClipboardButton: VFC = () => {
           dispatch(loadTL(tlData))
           dispatch(changeStartTime(tlData.startTime))
         } else {
-          dispatch(
-            openAlert({
-              message: 'TLの解析に失敗しました',
-              severity: 'error',
-              duration: 3000,
-              anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'center',
-              },
-            }),
-          )
+          openAlert({
+            message: 'TLの解析に失敗しました',
+            severity: 'error',
+            duration: 3000,
+            anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'center',
+            },
+          })
         }
       })
       .catch(() => undefined)

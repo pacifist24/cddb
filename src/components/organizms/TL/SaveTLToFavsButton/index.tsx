@@ -4,13 +4,14 @@ import { selectExistTLInFavs, addFav } from 'ducks/favs'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { generateTLId } from 'lib/util'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
-import { openAlert } from 'ducks/commonAlert'
+import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import Presenter from './presenter'
 
 const SaveTLToFavsButton: VFC = () => {
   const dispatch = useAppDispatch()
   const existTLInFavs = useAppSelector(selectExistTLInFavs)
   const tl = useAppSelector(selectTL)
+  const openAlert = useCommonAlertContext()
   const isDisabled = !useAppSelector(selectIsUBsInputVisible)
   const openDialog = useCommonDialogContext()
   const buttons = [
@@ -24,34 +25,30 @@ const SaveTLToFavsButton: VFC = () => {
         const newId = generateTLId()
         dispatch(changeTLId(newId))
         dispatch(addFav({ targetTLId: newId, tl }))
-        dispatch(
-          openAlert({
-            message: 'TLを新規保存しました。',
-            severity: 'success',
-            duration: 1500,
-            anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'center',
-            },
-          }),
-        )
+        openAlert({
+          message: 'TLを新規保存しました。',
+          severity: 'success',
+          duration: 1500,
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+          },
+        })
       },
     },
     {
       label: '上書き保存',
       handleClick: () => {
         dispatch(addFav({ targetTLId: tl.tlId, tl }))
-        dispatch(
-          openAlert({
-            message: 'TLを上書き保存しました。',
-            severity: 'success',
-            duration: 1500,
-            anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'center',
-            },
-          }),
-        )
+        openAlert({
+          message: 'TLを上書き保存しました。',
+          severity: 'success',
+          duration: 1500,
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+          },
+        })
       },
     },
   ]
@@ -68,17 +65,15 @@ const SaveTLToFavsButton: VFC = () => {
     } else {
       // ない場合は新規に保存する
       dispatch(addFav({ targetTLId: tl.tlId, tl }))
-      dispatch(
-        openAlert({
-          message: 'TLを新規保存しました。',
-          severity: 'success',
-          duration: 1500,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-          },
-        }),
-      )
+      openAlert({
+        message: 'TLを新規保存しました。',
+        severity: 'success',
+        duration: 1500,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+      })
     }
   }
 

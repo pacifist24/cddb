@@ -25,11 +25,11 @@ const initialState: CommonDialogState = {
 const CommonDialogContext = createContext<CommonDialogEventHandlerType>(() => undefined)
 
 export const CommonDialogProvider: FC = ({ children }) => {
-  const [commonDialogState, setcommonDialogState] = useState<CommonDialogState>(initialState)
+  const [commonDialogState, setCommonDialogState] = useState<CommonDialogState>(initialState)
 
   const openDialog = useMemo(
     () => (state: Omit<CommonDialogState, 'isOpen'>) => {
-      setcommonDialogState({
+      setCommonDialogState({
         ...state,
         isOpen: true,
       })
@@ -39,7 +39,7 @@ export const CommonDialogProvider: FC = ({ children }) => {
 
   const closeDialog = useMemo(
     () => () => {
-      setcommonDialogState({ ...commonDialogState, isOpen: false })
+      setCommonDialogState({ ...commonDialogState, isOpen: false })
     },
     [commonDialogState],
   )
