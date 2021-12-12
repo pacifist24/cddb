@@ -25,10 +25,13 @@ export const slice = createSlice({
     removeFav: (state, action: PayloadAction<string>) => {
       state.favsList = state.favsList.filter((fav) => fav.tlId !== action.payload)
     },
+    loadFavs: (state, action: PayloadAction<FavsState>) => {
+      state.favsList = action.payload.favsList
+    },
   },
 })
 
-export const { addFav, removeFav } = slice.actions
+export const { addFav, removeFav, loadFavs } = slice.actions
 
 export const selectFavs = (state: AppState): TLState[] => state.favs.favsList
 

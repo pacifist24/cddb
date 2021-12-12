@@ -3,7 +3,7 @@ import { selectTL, changeTLId, selectIsUBsInputVisible } from 'ducks/tl'
 import { selectExistTLInFavs, addFav } from 'ducks/favs'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { generateTLId } from 'lib/util'
-import { openDialog } from 'ducks/commonDialog'
+import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import { openAlert } from 'ducks/commonAlert'
 import Presenter from './presenter'
 
@@ -12,6 +12,7 @@ const SaveTLToFavsButton: VFC = () => {
   const existTLInFavs = useAppSelector(selectExistTLInFavs)
   const tl = useAppSelector(selectTL)
   const isDisabled = !useAppSelector(selectIsUBsInputVisible)
+  const openDialog = useCommonDialogContext()
   const buttons = [
     {
       label: 'キャンセル',
@@ -58,14 +59,12 @@ const SaveTLToFavsButton: VFC = () => {
   const onClick = () => {
     if (existTLInFavs) {
       // Favs内に既に同じTLIDのTLが存在する場合には上書きするか確認する
-      dispatch(
-        openDialog({
-          title: '上書き保存確認',
-          description: 'お気に入りに既に同一IDのTLが存在します、上書き保存しますか？',
-          buttons,
-          onClose: () => undefined,
-        }),
-      )
+      openDialog({
+        title: '上書き保存確認',
+        description: 'お気に入りに既に同一IDのTLが存在します、上書き保存しますか？',
+        buttons,
+        onClose: () => undefined,
+      })
     } else {
       // ない場合は新規に保存する
       dispatch(addFav({ targetTLId: tl.tlId, tl }))

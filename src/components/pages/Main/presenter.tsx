@@ -9,7 +9,6 @@ import Favs from 'components/templates/Favs'
 import TLOutputText from 'components/templates/TLOutputText'
 import { ContentType } from 'ducks/main'
 import CommonAlert from 'components/atoms/CommonAlert'
-import CommonDialog from 'components/atoms/CommonDialog'
 
 type Props = {
   displayedContent: ContentType
@@ -32,7 +31,6 @@ const Main: VFC<Props> = ({ displayedContent }) => (
       </Pane>
     </SplitPane>
     <CommonAlert />
-    <CommonDialog />
   </>
 )
 

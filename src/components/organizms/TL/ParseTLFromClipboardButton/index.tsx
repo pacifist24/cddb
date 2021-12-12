@@ -4,11 +4,12 @@ import { loadTL, selectHasTlId } from 'ducks/tl'
 import { changeStartTime } from 'ducks/style'
 import { openAlert } from 'ducks/commonAlert'
 import parseTlData from 'lib/tLParser'
-import { openDialog } from 'ducks/commonDialog'
+import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import Presenter from './presenter'
 
 const ParseTLFromClipboardButton: VFC = () => {
   const dispatch = useAppDispatch()
+  const openDialog = useCommonDialogContext()
   const handleClickOK = () => {
     navigator.clipboard
       .readText()
@@ -48,15 +49,13 @@ const ParseTLFromClipboardButton: VFC = () => {
   const hasId = useAppSelector(selectHasTlId)
   const onClick = () => {
     if (hasId) {
-      dispatch(
-        openDialog({
-          title: 'クリップボードからTLを読み込み',
-          description:
-            'クリップボードからTLを読み込んだ場合、今までの入力は全て破棄されますがよろしいですか？',
-          buttons,
-          onClose: () => undefined,
-        }),
-      )
+      openDialog({
+        title: 'クリップボードからTLを読み込み',
+        description:
+          'クリップボードからTLを読み込んだ場合、今までの入力は全て破棄されますがよろしいですか？',
+        buttons,
+        onClose: () => undefined,
+      })
     } else {
       handleClickOK()
     }

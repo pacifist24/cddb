@@ -20,7 +20,7 @@ type Props = {
   closeDialog: () => void
 }
 
-const CommonDialog: VFC<Props> = ({
+const DialogTemplate: VFC<Props> = ({
   title,
   description,
   buttons,
@@ -59,4 +59,4 @@ const CommonDialog: VFC<Props> = ({
   </div>
 )
 
-export default CommonDialog
+export default DialogTemplate

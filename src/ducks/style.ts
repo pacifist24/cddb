@@ -22,11 +22,9 @@ export const styleSlice = createSlice({
   reducers: {
     addNameConversionRule: (state, action: PayloadAction<{ key: string; value: string }>) => {
       state.nameConversionTable[action.payload.key] = action.payload.value
-      localStorage.setItem(`name${process.env.version}`, JSON.stringify(state.nameConversionTable))
     },
     deleteNameConversionRule: (state, action: PayloadAction<string>) => {
       delete state.nameConversionTable[action.payload]
-      localStorage.setItem(`name${process.env.version}`, JSON.stringify(state.nameConversionTable))
     },
     initNameConversionRule: (state, action: PayloadAction<{ [key: string]: string }>) => {
       state.nameConversionTable = action.payload
@@ -37,6 +35,11 @@ export const styleSlice = createSlice({
     changeStartTime: (state, action: PayloadAction<number>) => {
       state.startTime = action.payload
     },
+    loadStyle: (state, action: PayloadAction<StyleState>) => {
+      state.nameConversionTable = action.payload.nameConversionTable
+      state.shouldArrangeHorizontally = action.payload.shouldArrangeHorizontally
+      state.startTime = action.payload.startTime
+    },
   },
 })
 
@@ -46,6 +49,7 @@ export const {
   initNameConversionRule,
   changeArrangement,
   changeStartTime,
+  loadStyle,
 } = styleSlice.actions
 
 export const selectNameConversionTable = (state: AppState): { [key: string]: string } =>
@@ -54,5 +58,7 @@ export const selectNameConversionTable = (state: AppState): { [key: string]: str
 export const selectArrangement = (state: AppState): ArrangeType =>
   state.style.shouldArrangeHorizontally
 export const selectStartTime = (state: AppState): number => state.style.startTime
+
+export const selectStyle = (state: AppState): StyleState => state.style
 
 export default styleSlice.reducer
