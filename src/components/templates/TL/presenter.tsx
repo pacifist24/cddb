@@ -12,10 +12,11 @@ import SaveTLToFavsButton from 'components/organizms/TL/SaveTLToFavsButton'
 import AccidentRateInput from 'components/organizms/TL/AccidentRateInput'
 import DifficultyInput from 'components/organizms/TL/DifficultyInput'
 import OperationTypeInput from 'components/organizms/TL/OperationTypeInput'
+import SaveTLToServer from 'components/organizms/TL/SaveTLToServer'
 
 const Presenter: VFC = () => (
   <Column>
-    <div className="pb-5 mt-5 ml-5">
+    <div className="pb-10 mt-5 ml-5">
       <div className="flex">
         <span className="mr-2">
           <CharactersSelectButton />
@@ -47,8 +48,11 @@ const Presenter: VFC = () => (
       <div className="mt-6">
         <UBsInput />
       </div>
-      <div>
+      <div className="mt-3">
         <SaveTLToFavsButton />
+      </div>
+      <div className="mt-3">
+        <SaveTLToServer />
       </div>
     </div>
   </Column>

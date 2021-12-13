@@ -268,6 +268,7 @@ module.exports = {
     },
   },
   variants: {
+    display: ['responsive', 'hover', 'group-hover'],
     extend: {
       backgroundColor: ['active', 'disabled'],
     },

@@ -1,13 +1,10 @@
 import { VFC } from 'react'
-import { User } from 'firebase/auth'
 import { logout } from 'lib/auth'
+import { useAuthContext } from 'app/AuthContext'
 import Presenter from './presenter'
 
-type Props = {
-  user: User
-}
-
-const UserProfileButton: VFC<Props> = ({ user }) => {
+const UserProfileButton: VFC = () => {
+  const currentUser = useAuthContext().currentUser
   const menuItems = [
     {
       title: 'ログアウトする',
@@ -17,7 +14,7 @@ const UserProfileButton: VFC<Props> = ({ user }) => {
     },
   ]
 
-  return <Presenter user={user} menuItems={menuItems} />
+  return <Presenter user={currentUser} menuItems={menuItems} />
 }
 
 export default UserProfileButton

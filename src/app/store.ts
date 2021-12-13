@@ -4,6 +4,7 @@ import mainReducer from 'ducks/main'
 import tlReducer from 'ducks/tl'
 import styleReducer from 'ducks/style'
 import favsReducer from 'ducks/favs'
+import searchReducer from 'ducks/search'
 
 const makeStore = () =>
   configureStore({
@@ -12,6 +13,7 @@ const makeStore = () =>
       tl: tlReducer,
       favs: favsReducer,
       style: styleReducer,
+      search: searchReducer,
     },
   })
 

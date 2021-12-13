@@ -5,13 +5,19 @@ import { calcDiffDate } from 'lib/util'
 import { FULL_BATTLE_TIME } from 'lib/gameConstants'
 import PhaseChip from './PhaseChip'
 import OperationTypeChip from './OperationTypeChip'
+import UserPopupLink from './UserPopupLink'
 
 type Props = {
   tl: TLState
   menuItems: { title: string; func: () => void }[]
+  favsNum: number
+  authorProfile: {
+    userName: string
+    userId: string
+  }
 }
 
-const TLThumbnail: VFC<Props> = ({ tl, menuItems = [] }) => (
+const TLThumbnail: VFC<Props> = ({ tl, menuItems, favsNum, authorProfile }) => (
   <CommonMenu menuItems={menuItems} anchorOrigin={undefined}>
     <div className="flex items-center px-3 py-2 rounded-md hover:bg-gray-200" title={tl.comment}>
       <div className="relative">
@@ -24,14 +30,37 @@ const TLThumbnail: VFC<Props> = ({ tl, menuItems = [] }) => (
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="flex items-center pl-1 font-bold">
-          {`${tl.damage}万`}
+        <div className="flex items-center pl-1">
+          <div className="font-bold">{`${tl.damage}万`}</div>
           {tl.startTime - tl.endTime !== FULL_BATTLE_TIME && (
             <div className="ml-1 font-bold">{`(${tl.startTime - tl.endTime}秒)`}</div>
           )}
+
           <div className="ml-1 text-sm font-normal">
-            {`- ${calcDiffDate(new Date(tl.updateDateUTC))}`}
+            {`${calcDiffDate(new Date(tl.updateDateUTC))}`}
           </div>
+          {authorProfile && (
+            <UserPopupLink userName={authorProfile.userName} userId={authorProfile.userId} />
+          )}
+          {favsNum !== 0 && (
+            <div className="flex items-center ml-1 text-sm">
+              <div className="text-red-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <span className="text-sm font-bold">{favsNum}</span>
+            </div>
+          )}
         </div>
 
         <div className="flex">

@@ -103,3 +103,7 @@ export const calcDiffDate = (from: Date, to = new Date()): string => {
   }
   return `${elapsed.getUTCSeconds()}秒前`
 }
+
+/** textがlen字よりも長かったらellipsisを末尾に付けて省略する */
+export const omit = (text: string, len: number, ellipsis: string): string =>
+  text.length >= len ? text.slice(0, len - ellipsis.length) + ellipsis : text

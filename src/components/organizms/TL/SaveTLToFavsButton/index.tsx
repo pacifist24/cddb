@@ -58,7 +58,7 @@ const SaveTLToFavsButton: VFC = () => {
       // Favs内に既に同じTLIDのTLが存在する場合には上書きするか確認する
       openDialog({
         title: '上書き保存確認',
-        description: 'お気に入りに既に同一IDのTLが存在します、上書き保存しますか？',
+        description: 'TL保管に既に同一IDのTLが存在します、上書き保存しますか？',
         buttons,
         onClose: () => undefined,
       })

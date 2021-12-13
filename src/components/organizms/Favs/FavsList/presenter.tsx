@@ -12,7 +12,13 @@ const FavsList: VFC<Props> = ({ tls, makeManuItems }) => (
     {[...tls]
       .sort((a, b) => b.updateDateUTC - a.updateDateUTC)
       .map((tl) => (
-        <TLThumbnail tl={tl} key={tl.tlId} menuItems={makeManuItems(tl)} />
+        <TLThumbnail
+          tl={tl}
+          key={tl.tlId}
+          menuItems={makeManuItems(tl)}
+          authorProfile={undefined}
+          favsNum={undefined}
+        />
       ))}
   </>
 )

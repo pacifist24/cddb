@@ -8,7 +8,7 @@ type Props = {
 
 const SaveTLToFavsButton: VFC<Props> = ({ onClick, isDisabled }) => (
   <Button variant="contained" color="primary" onClick={onClick} disabled={isDisabled}>
-    お気に入り（ローカル）にTLを保存
+    TL保管（ローカル）にTLを保存
   </Button>
 )
 
