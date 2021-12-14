@@ -15,8 +15,6 @@ const DamageInput: VFC<Props> = ({ tl, changeDamage, isCharactersSelected }) => 
       <TextField
         label="ダメージ"
         variant="outlined"
-        size="small"
-        type="number"
         inputProps={{
           min: 0,
           max: Math.floor(MAX_DAMAGE / 10000),
@@ -25,12 +23,12 @@ const DamageInput: VFC<Props> = ({ tl, changeDamage, isCharactersSelected }) => 
         className="w-24"
         value={tl.damage}
         onChange={(e) => {
-          if (
-            !Number.isNaN(parseInt(e.target.value, 10)) &&
-            Number.isInteger(parseInt(e.target.value, 10))
-          ) {
-            changeDamage(parseInt(e.target.value, 10))
-          }
+          changeDamage(parseInt(e.target.value, 10))
+        }}
+        type="number"
+        size="small"
+        InputLabelProps={{
+          shrink: true,
         }}
         disabled={!isCharactersSelected}
       />

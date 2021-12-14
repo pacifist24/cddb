@@ -6,11 +6,14 @@ import {
   removeSearchResult,
   doFav as doFavLocal,
 } from 'ducks/search'
+import { addFav } from 'ducks/favs'
 import { loadTL } from 'ducks/tl'
 import { useAuthContext } from 'app/AuthContext'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import { deleteTL, doFav, buildSaveIdFromData } from 'lib/dbRegistration'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
+import { generateTLId } from 'lib/util'
+
 import Presenter from './presenter'
 
 const SearchResultList: VFC = () => {
@@ -19,6 +22,7 @@ const SearchResultList: VFC = () => {
   const openAlert = useCommonAlertContext()
   const currentUser = useAuthContext().currentUser
   const openDialog = useCommonDialogContext()
+
   const makeMenuItems = (searchResult: DBTLDataType) => {
     const menuItems = [
       {
@@ -27,6 +31,21 @@ const SearchResultList: VFC = () => {
           dispatch(loadTL(searchResult.tl))
           openAlert({
             message: 'TLの読み込みに成功しました',
+            severity: 'success',
+            duration: 1500,
+            anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'center',
+            },
+          })
+        },
+      },
+      {
+        title: 'TL保管に追加',
+        func: () => {
+          dispatch(addFav({ targetTLId: generateTLId(), tl: searchResult.tl }))
+          openAlert({
+            message: 'TLを新規保存しました。',
             severity: 'success',
             duration: 1500,
             anchorOrigin: {
