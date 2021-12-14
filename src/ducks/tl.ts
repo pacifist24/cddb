@@ -31,7 +31,6 @@ export type TLState = {
   timeline: UB[]
   comment: string
   tlId: string | null
-  userId: string | null
   updateDateUTC: number | null
   accidentRate: number
   operation: OperationType
@@ -49,7 +48,6 @@ const initialState: TLState = {
   timeline: [],
   comment: '',
   tlId: null,
-  userId: null,
   updateDateUTC: null,
   accidentRate: 0,
   operation: 'manual',
@@ -148,7 +146,6 @@ export const slice = createSlice({
       state.startTime = action.payload.startTime
       state.endTime = action.payload.endTime
       state.tlId = action.payload.tlId
-      state.userId = action.payload.userId
       state.updateDateUTC = action.payload.updateDateUTC
       state.accidentRate = action.payload.accidentRate
       state.operation = action.payload.operation
@@ -166,7 +163,6 @@ export const slice = createSlice({
       state.startTime = initialState.startTime
       state.endTime = initialState.endTime
       state.tlId = initialState.tlId
-      state.userId = initialState.userId
       state.updateDateUTC = initialState.updateDateUTC
       state.accidentRate = initialState.accidentRate
       state.operation = initialState.operation
