@@ -27,6 +27,8 @@ export type SearchState = {
   allowEasyManual: boolean
   timeRequiredLower: number
   timeRequiredUpper: number
+  accidentRateCondition: number
+  excludedCharacters: string[]
 }
 
 const initialState: SearchState = {
@@ -43,6 +45,8 @@ const initialState: SearchState = {
   timeRequiredLower: 0,
   timeRequiredUpper: FULL_BATTLE_TIME,
   updateDateLimit: 0,
+  accidentRateCondition: 100,
+  excludedCharacters: [],
 }
 
 export const slice = createSlice({
@@ -103,6 +107,17 @@ export const slice = createSlice({
     changeUpdateDateLimit: (state, action: PayloadAction<number>) => {
       state.updateDateLimit = action.payload
     },
+    changeAccidentRateCondition: (state, action: PayloadAction<number>) => {
+      state.accidentRateCondition = action.payload
+    },
+    addExcludedCharacter: (state, action: PayloadAction<string>) => {
+      state.excludedCharacters.push(action.payload)
+    },
+    removeExcludedCharacter: (state, action: PayloadAction<string>) => {
+      state.excludedCharacters = state.excludedCharacters.filter(
+        (character) => character !== action.payload,
+      )
+    },
   },
 })
 
@@ -125,6 +140,13 @@ const filters = (conditions: SearchState) => [
   (d: DBTLDataType) =>
     d.tl.startTime - d.tl.endTime >= conditions.timeRequiredLower &&
     d.tl.startTime - d.tl.endTime <= conditions.timeRequiredUpper,
+  (d: DBTLDataType) => d.tl.accidentRate <= conditions.accidentRateCondition,
+  (d: DBTLDataType) =>
+    d.tl.characters.reduce(
+      (currentValue, character) =>
+        currentValue && !conditions.excludedCharacters.includes(character.name),
+      true,
+    ),
 ]
 
 export const {
@@ -143,6 +165,9 @@ export const {
   changeTimeRequiredLower,
   changeTimeRequiredUpper,
   changeUpdateDateLimit,
+  changeAccidentRateCondition,
+  addExcludedCharacter,
+  removeExcludedCharacter,
 } = slice.actions
 export const selectSearchResults = (state: AppState): DBTLDataType[] => {
   let results = [...state.search.searchResults]
@@ -173,5 +198,8 @@ export const selectAllowMidManual = (state: AppState): boolean => state.search.a
 export const selectAllowEasyManual = (state: AppState): boolean => state.search.allowEasyManual
 export const selectTimeRequiredLower = (state: AppState): number => state.search.timeRequiredLower
 export const selectTimeRequiredUpper = (state: AppState): number => state.search.timeRequiredUpper
-
+export const selectAccidentRateCondition = (state: AppState): number =>
+  state.search.accidentRateCondition
+export const selectExcludedCharacters = (state: AppState): string[] =>
+  state.search.excludedCharacters
 export default slice.reducer

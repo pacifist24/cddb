@@ -10,6 +10,8 @@ import UpdateDateLimitInput from './UpdateDateLimitInput'
 import DamageConditionInput from './DamageConditionInput'
 import OperationTypeConditionInputs from './OperationTypeConditionInputs'
 import TimeRequiredInputs from './TimeRequiredInputs'
+import AccidentRateConditionInput from './AccidentRateConditionInput'
+import ExcludedCharactersSelectButton from './ExcludedCharactersSelectButton'
 
 const ConditionsInput: VFC = () => (
   <Accordion>
@@ -34,10 +36,16 @@ const ConditionsInput: VFC = () => (
         <DamageConditionInput />
       </div>
       <div className="mt-5">
-        <OperationTypeConditionInputs />
+        <AccidentRateConditionInput />
+      </div>
+      <div className="mt-5">
+        <TimeRequiredInputs />
       </div>
       <div className="mt-5 mb-3">
-        <TimeRequiredInputs />
+        <OperationTypeConditionInputs />
+      </div>
+      <div>
+        <ExcludedCharactersSelectButton />
       </div>
     </AccordionDetails>
   </Accordion>
