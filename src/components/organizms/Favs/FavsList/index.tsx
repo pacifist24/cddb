@@ -1,13 +1,13 @@
 import { VFC } from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { selectFavs, removeFav } from 'ducks/favs'
+import { selectFavsInSelectedGroup, removeFav } from 'ducks/favs'
 import { loadTL, TLState } from 'ducks/tl'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import Presenter from './presenter'
 
 const FavsList: VFC = () => {
   const dispatch = useAppDispatch()
-  const tls = useAppSelector(selectFavs)
+  const favs = useAppSelector(selectFavsInSelectedGroup)
   const openAlert = useCommonAlertContext()
   const makeMenuItems = (tl: TLState) => [
     {
@@ -41,7 +41,7 @@ const FavsList: VFC = () => {
       },
     },
   ]
-  return <Presenter tls={tls} makeManuItems={makeMenuItems} />
+  return <Presenter favs={favs} makeManuItems={makeMenuItems} />
 }
 
 export default FavsList

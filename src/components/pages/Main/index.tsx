@@ -2,14 +2,14 @@ import { VFC, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { selectDisplayedContent } from 'ducks/main'
 import { loadStyle, selectStyle, StyleState } from 'ducks/style'
-import { FavsState, loadFavs, selectFavs } from 'ducks/favs'
+import { FavsState, loadFavs, selectFavsAndGroupData } from 'ducks/favs'
 import { TLState, selectTL, loadTL } from 'ducks/tl'
 import Presenter from './presenter'
 
 const Main: VFC = () => {
   const dispatch = useAppDispatch()
   const displayedContent = useAppSelector(selectDisplayedContent)
-  const favs = useAppSelector(selectFavs)
+  const favs = useAppSelector(selectFavsAndGroupData)
   const tl = useAppSelector(selectTL)
   const style = useAppSelector(selectStyle)
 
@@ -41,7 +41,7 @@ const Main: VFC = () => {
 
   // Favs変更時にローカルストレージに保存する
   useEffect(() => {
-    localStorage.setItem(favsLocalStrageKey, JSON.stringify({ favsList: favs }))
+    localStorage.setItem(favsLocalStrageKey, JSON.stringify(favs))
   }, [favs, favsLocalStrageKey])
 
   // tl変更時にローカルストレージに保存する

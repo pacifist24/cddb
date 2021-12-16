@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { VFC, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import {
   selectSearchResults,
@@ -7,7 +7,7 @@ import {
   doFav as doFavLocal,
 } from 'ducks/search'
 import { addFav } from 'ducks/favs'
-import { loadTL } from 'ducks/tl'
+import { loadTL, TLState } from 'ducks/tl'
 import { useAuthContext } from 'app/AuthContext'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import { deleteTL, doFav, buildSaveIdFromData } from 'lib/dbRegistration'
@@ -23,6 +23,23 @@ const SearchResultList: VFC = () => {
   const currentUser = useAuthContext().currentUser
   const openDialog = useCommonDialogContext()
 
+  const [groupName, setGroupName] = useState('')
+  const [isGroupNameSelectDialogOpen, setIsGroupNameSelectDialogOpen] = useState(false)
+  const [targetTL, setTargetTL] = useState<TLState>(undefined)
+
+  const handleClickDialogOK = () => {
+    dispatch(addFav({ targetTLId: generateTLId(), tl: targetTL, group: groupName }))
+    setIsGroupNameSelectDialogOpen(false)
+    openAlert({
+      message: 'TLを新規保存しました。',
+      severity: 'success',
+      duration: 1500,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+      },
+    })
+  }
   const makeMenuItems = (searchResult: DBTLDataType) => {
     const menuItems = [
       {
@@ -43,16 +60,8 @@ const SearchResultList: VFC = () => {
       {
         title: 'TL保管に追加',
         func: () => {
-          dispatch(addFav({ targetTLId: generateTLId(), tl: searchResult.tl }))
-          openAlert({
-            message: 'TLを新規保存しました。',
-            severity: 'success',
-            duration: 1500,
-            anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'center',
-            },
-          })
+          setTargetTL(searchResult.tl)
+          setIsGroupNameSelectDialogOpen(true)
         },
       },
     ]
@@ -79,7 +88,7 @@ const SearchResultList: VFC = () => {
 
     if (currentUser && currentUser.uid === searchResult.userId) {
       menuItems.push({
-        title: 'TLを削除する',
+        title: 'TLを公開サーバー上から削除する',
         func: () => {
           openDialog({
             title: 'TL削除',
@@ -114,7 +123,18 @@ const SearchResultList: VFC = () => {
 
     return menuItems
   }
-  return <Presenter searchResults={searchResults} makeManuItems={makeMenuItems} />
+  return (
+    <Presenter
+      searchResults={searchResults}
+      makeManuItems={makeMenuItems}
+      groupName={groupName}
+      handleChangeGroupName={setGroupName}
+      isOpen={isGroupNameSelectDialogOpen}
+      setIsOpen={setIsGroupNameSelectDialogOpen}
+      handleClickOK={handleClickDialogOK}
+      handleClickCancel={() => setIsGroupNameSelectDialogOpen(false)}
+    />
+  )
 }
 
 export default SearchResultList

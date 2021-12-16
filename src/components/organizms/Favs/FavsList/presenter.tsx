@@ -1,21 +1,22 @@
 import { VFC } from 'react'
+import { FavState } from 'ducks/favs'
 import { TLState } from 'ducks/tl'
 import TLThumbnail from 'components/molecules/TLThumbnail'
 
 type Props = {
-  tls: TLState[]
+  favs: FavState[]
   makeManuItems: (tl: TLState) => { title: string; func: () => void }[]
 }
 
-const FavsList: VFC<Props> = ({ tls, makeManuItems }) => (
+const FavsList: VFC<Props> = ({ favs, makeManuItems }) => (
   <>
-    {[...tls]
-      .sort((a, b) => b.updateDateUTC - a.updateDateUTC)
-      .map((tl) => (
+    {[...favs]
+      .sort((a, b) => b.tl.updateDateUTC - a.tl.updateDateUTC)
+      .map((fav) => (
         <TLThumbnail
-          tl={tl}
-          key={tl.tlId}
-          menuItems={makeManuItems(tl)}
+          tl={fav.tl}
+          key={fav.tl.tlId}
+          menuItems={makeManuItems(fav.tl)}
           authorProfile={undefined}
           favsNum={undefined}
         />
