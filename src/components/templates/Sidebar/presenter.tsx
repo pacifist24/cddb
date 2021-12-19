@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import SettingsIcon from '@mui/icons-material/Settings'
 import SyncAltIcon from '@mui/icons-material/SyncAlt'
+import MovingIcon from '@mui/icons-material/Moving'
 import LoginButton from 'components/organizms/Sidebar/LoginButton'
 import UserProfileButton from 'components/organizms/Sidebar/UserProfileButton'
 
@@ -38,6 +39,12 @@ const Presenter: VFC<Props> = ({ displayedContent, handleChangeDisplayedContent 
             linkLabel="TL保管"
             isSelected={displayedContent === 'favs'}
             handleChangeDisplayedContent={() => handleChangeDisplayedContent('favs')}
+          />
+          <SidebarMenuLink
+            linkIcon={<MovingIcon />}
+            linkLabel="凸ルート計算"
+            isSelected={displayedContent === 'route'}
+            handleChangeDisplayedContent={() => handleChangeDisplayedContent('route')}
           />
           <SidebarMenuLink
             linkIcon={<SyncAltIcon />}

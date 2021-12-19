@@ -19,7 +19,11 @@ type Props = {
 
 const TLThumbnail: VFC<Props> = ({ tl, menuItems, favsNum, authorProfile }) => (
   <CommonMenu menuItems={menuItems} anchorOrigin={undefined}>
-    <div className="flex items-center px-3 py-2 rounded-md hover:bg-gray-200" title={tl.comment}>
+    <div
+      className="flex items-center px-3 py-2 rounded-md hover:bg-gray-200"
+      style={{ width: '415px' }}
+      title={tl.comment}
+    >
       <div className="relative">
         <img src={`/bosses/${tl.bossName}.png`} className="w-20 h-20" alt={tl.bossName} />
         <div className="absolute bottom-0.5 right-0.5">

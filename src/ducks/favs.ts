@@ -73,8 +73,13 @@ export const selectExistTLInFavs = (state: AppState): boolean =>
 export const selectExistFavByTLIdAndGroupName =
   (tlId: string, groupName: string) =>
   (state: AppState): boolean =>
-    state.favs.favsList.filter((fav) => tlId === state.tl.tlId && groupName === fav.group)
-      .length !== 0
+    state.favs.favsList.filter((fav) => tlId === fav.tl.tlId && groupName === fav.group).length !==
+    0
+
+export const selectFavsByGroupName =
+  (targetGroup: string) =>
+  (state: AppState): TLState[] =>
+    state.favs.favsList.filter((fav) => fav.group === targetGroup).map((fav) => fav.tl)
 
 export const selectSelectedGroup = (state: AppState): string => state.favs.selectedGroup
 export const selectGroupList = (state: AppState): string[] => state.favs.groupList

@@ -12,6 +12,7 @@ import OperationTypeConditionInputs from './OperationTypeConditionInputs'
 import TimeRequiredInputs from './TimeRequiredInputs'
 import AccidentRateConditionInput from './AccidentRateConditionInput'
 import ExcludedCharactersSelectButton from './ExcludedCharactersSelectButton'
+import PhaseConditionInput from './PhaseConditionInput'
 
 const ConditionsInput: VFC = () => (
   <Accordion>
@@ -25,6 +26,9 @@ const ConditionsInput: VFC = () => (
     <AccordionDetails>
       <div className="">
         <BossNameConditionInput />
+      </div>
+      <div className="mt-5">
+        <PhaseConditionInput />
       </div>
       <div className="mt-5">
         <LikeNumConditionInput />

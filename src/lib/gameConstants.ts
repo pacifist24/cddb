@@ -5,6 +5,7 @@ export const MAX_STAR = 6
 export const MAX_PHASE = 5
 export const MAX_DAMAGE = 999999999
 export const FULL_BATTLE_TIME = 90
+export const LAST_ATTACK_BONUS_TIME = 20
 
 export const BOSSES_INFO = {
   アクアリオス: {},
@@ -16,6 +17,7 @@ export const BOSSES_INFO = {
   グラットン: {},
   ゴブリングレート: {},
   サイクロプス: {},
+  サジタリウス: {},
   シードレイク: {},
   スカイワルキューレ: {},
   ソードコブラ: {},
@@ -817,6 +819,11 @@ export const CHARACTERS_INFO: {
     maxStar: 5,
     position: 725,
     hasSpecial: true,
+  },
+  ホマレ: {
+    maxStar: 5,
+    position: 727,
+    hasSpecial: false,
   },
   カスミ: {
     maxStar: 5,

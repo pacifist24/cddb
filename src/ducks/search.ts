@@ -17,6 +17,7 @@ export type SearchState = {
   searchResults: DBTLDataType[]
   sortKey: SortType
   bossNameConditon: string
+  phaseCondition: number
   updateDateLimit: number
   likeNumCondition: number
   damageCondition: number
@@ -35,6 +36,7 @@ const initialState: SearchState = {
   searchResults: [],
   sortKey: 'like',
   bossNameConditon: '',
+  phaseCondition: 0,
   likeNumCondition: 0,
   damageCondition: 0,
   allowFullAuto: true,
@@ -118,12 +120,16 @@ export const slice = createSlice({
         (character) => character !== action.payload,
       )
     },
+    changePhaseCondition: (state, action: PayloadAction<number>) => {
+      state.phaseCondition = action.payload
+    },
   },
 })
 
 const filters = (conditions: SearchState) => [
   (d: DBTLDataType) =>
     conditions.bossNameConditon === '' || d.tl.bossName === conditions.bossNameConditon,
+  (d: DBTLDataType) => conditions.phaseCondition === 0 || d.tl.phase === conditions.phaseCondition,
   (d: DBTLDataType) => d.fav >= conditions.likeNumCondition,
   (d: DBTLDataType) =>
     conditions.updateDateLimit === 0 ||
@@ -168,6 +174,7 @@ export const {
   changeAccidentRateCondition,
   addExcludedCharacter,
   removeExcludedCharacter,
+  changePhaseCondition,
 } = slice.actions
 export const selectSearchResults = (state: AppState): DBTLDataType[] => {
   let results = [...state.search.searchResults]
@@ -202,4 +209,5 @@ export const selectAccidentRateCondition = (state: AppState): number =>
   state.search.accidentRateCondition
 export const selectExcludedCharacters = (state: AppState): string[] =>
   state.search.excludedCharacters
+export const selectPhaseCondition = (state: AppState): number => state.search.phaseCondition
 export default slice.reducer

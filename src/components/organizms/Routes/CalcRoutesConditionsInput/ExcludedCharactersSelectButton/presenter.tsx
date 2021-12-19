@@ -4,16 +4,14 @@ import ExcludedCharactersSelectModal from './ExcludedCharactersSelectModal'
 
 type Props = {
   excludedCharacters: string[]
-  addExcludedCharacter: (characterName: string) => void
-  removeExcludedCharacter: (characterName: string) => void
+  toggleExcludedCharacter: (characterName: string) => void
   isExcludedCharactersSelectModalOpen: boolean
   setIsExcludedCharactersSelectModalOpen: (open: boolean) => void
 }
 
 const ExcludedCharactersSelectButton: VFC<Props> = ({
   excludedCharacters,
-  addExcludedCharacter,
-  removeExcludedCharacter,
+  toggleExcludedCharacter,
   isExcludedCharactersSelectModalOpen,
   setIsExcludedCharactersSelectModalOpen,
 }) => (
@@ -43,8 +41,7 @@ const ExcludedCharactersSelectButton: VFC<Props> = ({
       isOpen={isExcludedCharactersSelectModalOpen}
       setIsOpen={setIsExcludedCharactersSelectModalOpen}
       excludedCharacters={excludedCharacters}
-      addExcludedCharacter={addExcludedCharacter}
-      removeExcludedCharacter={removeExcludedCharacter}
+      toggleExcludedCharacter={toggleExcludedCharacter}
     />
   </div>
 )

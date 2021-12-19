@@ -8,6 +8,7 @@ import Config from 'components/templates/Config'
 import Favs from 'components/templates/Favs'
 import Search from 'components/templates/Search'
 import TLOutputText from 'components/templates/TLOutputText'
+import AttackRoute from 'components/templates/Routes'
 import { ContentType } from 'ducks/main'
 import { isMobile } from 'react-device-detect'
 
@@ -27,6 +28,7 @@ const Main: VFC<Props> = ({ displayedContent }) => (
           {displayedContent === 'tl' && <TL />}
           {displayedContent === 'search' && <Search />}
           {displayedContent === 'favs' && <Favs />}
+          {displayedContent === 'route' && <AttackRoute />}
           {displayedContent === 'name' && <CharacterNameConverter />}
           {displayedContent === 'config' && <Config />}
         </Pane>
