@@ -1,29 +1,25 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem, FormLabel } from '@mui/material'
+import { VFC, ChangeEvent } from 'react'
+import { FormLabel } from '@mui/material'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  phaseCondition: number
-  onChange: (value: number) => void
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const PhaseConditionInput: VFC<Props> = ({ phaseCondition, onChange }) => (
+const PhaseConditionInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
     <FormLabel component="legend">段階:</FormLabel>
-    <FormControl size="small" variant="outlined" className="w-32 ml-3">
-      <InputLabel>段階</InputLabel>
-      <Select
-        value={phaseCondition}
-        label="段階"
-        onChange={(e) => onChange(e.target.value as number)}
-      >
-        <MenuItem value={0}>指定なし</MenuItem>
-        <MenuItem value={1}>1段階目</MenuItem>
-        <MenuItem value={2}>2段階目</MenuItem>
-        <MenuItem value={3}>3段階目</MenuItem>
-        <MenuItem value={4}>4段階目</MenuItem>
-        <MenuItem value={5}>5段階目</MenuItem>
-      </Select>
-    </FormControl>
+    <SelectInput
+      value={value}
+      onChange={onChange}
+      label="段階"
+      disabled={disabled}
+      items={items}
+      className="w-32 ml-3"
+    />
   </div>
 )
 

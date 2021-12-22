@@ -1,4 +1,16 @@
-import { setDoc, getFirestore, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import {
+  setDoc,
+  getFirestore,
+  getDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  getDocs,
+  collection,
+  limit,
+  orderBy,
+  query,
+} from 'firebase/firestore'
 import { TLState } from 'ducks/tl'
 import { initializeApp } from 'firebase/app'
 import { User } from 'firebase/auth'
@@ -99,4 +111,16 @@ export const undoGoodEval = async (tlId: string): Promise<void> => {
   } catch (e) {
     console.error('Error updating document: ', e)
   }
+}
+
+/** TLを検索する */
+export const fetchTlsData = async (limitNum = 1000): Promise<DBTLDataType[]> => {
+  const q = query(
+    collection(db, TL_COLLECTION_NAME),
+    orderBy('tl.updateDateUTC', 'desc'),
+    orderBy('fav', 'desc'),
+    limit(limitNum),
+  )
+  const querySnapshot = await getDocs(q)
+  return querySnapshot.docs.map((doc) => doc.data()) as DBTLDataType[]
 }

@@ -1,34 +1,24 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem, FormLabel } from '@mui/material'
+import { VFC, ChangeEvent } from 'react'
+import { FormLabel } from '@mui/material'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  updateDateLimit: number
-  changeUpdateDateLimit: (updateDateLimit: number) => void
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
-
-const oneHourInMS = 60 * 60 * 1000
-
-const UpdateDateLimitInput: VFC<Props> = ({ updateDateLimit, changeUpdateDateLimit }) => (
+const UpdateDateLimitInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
     <FormLabel component="legend">投稿日時:</FormLabel>
-    <FormControl size="small" variant="outlined" className="ml-1 w-36">
-      <InputLabel>投稿日時</InputLabel>
-      <Select
-        value={updateDateLimit}
-        label="投稿日時"
-        onChange={(e) => changeUpdateDateLimit(e.target.value as number)}
-      >
-        <MenuItem value={0}>指定なし</MenuItem>
-        <MenuItem value={oneHourInMS}>1時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 2}>2時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 3}>3時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 6}>6時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 12}>12時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 24}>24時間以内</MenuItem>
-        <MenuItem value={oneHourInMS * 48}>2日以内</MenuItem>
-        <MenuItem value={oneHourInMS * 72}>3日以内</MenuItem>
-      </Select>
-    </FormControl>
+    <SelectInput
+      value={value}
+      onChange={onChange}
+      label="投稿日時"
+      disabled={disabled}
+      items={items}
+      className="ml-1 w-36"
+    />
   </div>
 )
 

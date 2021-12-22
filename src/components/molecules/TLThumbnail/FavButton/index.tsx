@@ -1,9 +1,6 @@
 import { VFC, useState } from 'react'
 import { doGoodEval as doGoodEvalLocal, undoGoodEval as undoGoodEvalLocal } from 'ducks/search'
-import {
-  doGoodEval as doGoodEvalServer,
-  undoGoodEval as undoGoodEvalServer,
-} from 'lib/dbRegistration'
+import { doGoodEval as doGoodEvalServer, undoGoodEval as undoGoodEvalServer } from 'lib/dbAccess'
 
 import { useAppDispatch } from 'app/hooks'
 import Presenter from './presenter'

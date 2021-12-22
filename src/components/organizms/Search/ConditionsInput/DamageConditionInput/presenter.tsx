@@ -1,31 +1,26 @@
-import { VFC } from 'react'
-import TextField from '@mui/material/TextField'
+import { VFC, ChangeEvent } from 'react'
 import { FormLabel } from '@mui/material'
+import NumberInput from 'components/atoms/NumberInput'
 import { MAX_DAMAGE } from 'lib/gameConstants'
 
 type Props = {
-  damageCondition: number
-  changeDamageCondition: (damageCondition: number) => void
+  value: number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
 }
 
-const DamageConditionInput: VFC<Props> = ({ damageCondition, changeDamageCondition }) => (
+const DamageConditionInput: VFC<Props> = ({ value, onChange, disabled }) => (
   <div className="flex items-center">
     <FormLabel component="legend">ダメージ:</FormLabel>
-    <TextField
+    <NumberInput
+      value={value}
       label="ダメージ"
-      type="number"
-      size="small"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      inputProps={{
-        min: 0,
-        max: Math.floor(MAX_DAMAGE / 10000),
-        step: 100,
-      }}
-      value={damageCondition}
-      onChange={(e) => changeDamageCondition(parseInt(e.target.value, 10))}
+      onChange={onChange}
+      disabled={disabled}
       className="w-24 ml-3"
+      min={0}
+      max={MAX_DAMAGE}
+      step={100}
     />
     <span className="ml-1">万以上</span>
   </div>

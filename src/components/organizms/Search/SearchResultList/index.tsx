@@ -5,7 +5,7 @@ import { addFav } from 'ducks/favs'
 import { loadTL, TLState } from 'ducks/tl'
 import { useAuthContext } from 'app/AuthContext'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
-import { deleteTL } from 'lib/dbRegistration'
+import { deleteTL } from 'lib/dbAccess'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import { generateTLId } from 'lib/util'
 

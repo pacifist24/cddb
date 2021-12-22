@@ -1,5 +1,5 @@
 import { VFC, useState } from 'react'
-import { fetchTlsData } from 'lib/dbSearch'
+import { fetchTlsData } from 'lib/dbAccess'
 import { setSearchResults } from 'ducks/search'
 import { useAppDispatch } from 'app/hooks'
 import Presenter from './presenter'

@@ -1,5 +1,4 @@
 import { VFC } from 'react'
-// import { fetchTlsData } from 'lib/dbSearch'
 import { changeSortKey, SortType, selectSortKey } from 'ducks/search'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Presenter from './presenter'
