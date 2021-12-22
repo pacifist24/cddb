@@ -19,7 +19,6 @@ export type UB = {
 }
 
 export type OperationType = 'fullAuto' | 'semiAuto' | 'manual'
-export type DifficultyType = 'low' | 'mid' | 'high'
 
 export type TLState = {
   phase: number
@@ -34,7 +33,6 @@ export type TLState = {
   updateDateUTC: number | null
   accidentRate: number
   operation: OperationType
-  difficulty: DifficultyType
   requireTool: boolean
 }
 
@@ -51,7 +49,6 @@ const initialState: TLState = {
   updateDateUTC: null,
   accidentRate: 0,
   operation: 'manual',
-  difficulty: 'mid',
   requireTool: false,
 }
 
@@ -64,9 +61,6 @@ export const slice = createSlice({
     },
     changeOperation: (state, action: PayloadAction<OperationType>) => {
       state.operation = action.payload
-    },
-    changeDifficulty: (state, action: PayloadAction<DifficultyType>) => {
-      state.difficulty = action.payload
     },
     changeRequireTool: (state, action: PayloadAction<boolean>) => {
       state.requireTool = action.payload
@@ -149,7 +143,6 @@ export const slice = createSlice({
       state.updateDateUTC = action.payload.updateDateUTC
       state.accidentRate = action.payload.accidentRate
       state.operation = action.payload.operation
-      state.difficulty = action.payload.difficulty
       state.requireTool = action.payload.requireTool
     },
     initializeTL: (state) => {
@@ -166,7 +159,6 @@ export const slice = createSlice({
       state.updateDateUTC = initialState.updateDateUTC
       state.accidentRate = initialState.accidentRate
       state.operation = initialState.operation
-      state.difficulty = initialState.difficulty
       state.requireTool = initialState.requireTool
     },
   },
@@ -197,7 +189,6 @@ export const {
   initializeTL,
   changeAccidentRate,
   changeOperation,
-  changeDifficulty,
   changeRequireTool,
 } = slice.actions
 
@@ -214,7 +205,6 @@ export const selectTimestamp = (state: AppState): Date => new Date(state.tl.upda
 export const selectAccidentRate = (state: AppState): number => state.tl.accidentRate
 export const selectBossName = (state: AppState): string => state.tl.bossName
 export const selectDamage = (state: AppState): number => state.tl.damage
-export const selectDifficulty = (state: AppState): DifficultyType => state.tl.difficulty
 export const selectOperation = (state: AppState): OperationType => state.tl.operation
 export const selectPhase = (state: AppState): number => state.tl.phase
 export const selectCharacters = (state: AppState): Character[] => state.tl.characters

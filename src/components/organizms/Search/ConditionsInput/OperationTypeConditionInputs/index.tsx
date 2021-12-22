@@ -2,14 +2,10 @@ import { VFC } from 'react'
 import {
   selectAllowFullAuto,
   selectAllowSemiAuto,
-  selectAllowDifficultManual,
-  selectAllowMidManual,
-  selectAllowEasyManual,
+  selectAllowManual,
   toggleAllowFullAuto,
   toggleAllowSemiAuto,
-  toggleAllowDifficultManual,
-  toggleAllowMidManual,
-  toggleAllowEasyManual,
+  toggleAllowManual,
 } from 'ducks/search'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Presenter from './presenter'
@@ -18,21 +14,15 @@ const SortConditionRadio: VFC = () => {
   const dispatch = useAppDispatch()
   const allowFullAuto = useAppSelector(selectAllowFullAuto)
   const allowSemiAuto = useAppSelector(selectAllowSemiAuto)
-  const allowDifficultManual = useAppSelector(selectAllowDifficultManual)
-  const allowMidManual = useAppSelector(selectAllowMidManual)
-  const allowEasyManual = useAppSelector(selectAllowEasyManual)
+  const allowManual = useAppSelector(selectAllowManual)
   return (
     <Presenter
       allowFullAuto={allowFullAuto}
       allowSemiAuto={allowSemiAuto}
-      allowDifficultManual={allowDifficultManual}
-      allowMidManual={allowMidManual}
-      allowEasyManual={allowEasyManual}
+      allowManual={allowManual}
       toggleAllowFullAuto={() => dispatch(toggleAllowFullAuto())}
       toggleAllowSemiAuto={() => dispatch(toggleAllowSemiAuto())}
-      toggleAllowDifficultManual={() => dispatch(toggleAllowDifficultManual())}
-      toggleAllowMidManual={() => dispatch(toggleAllowMidManual())}
-      toggleAllowEasyManual={() => dispatch(toggleAllowEasyManual())}
+      toggleAllowManual={() => dispatch(toggleAllowManual())}
     />
   )
 }

@@ -23,9 +23,7 @@ export type SearchState = {
   damageCondition: number
   allowFullAuto: boolean
   allowSemiAuto: boolean
-  allowDifficultManual: boolean
-  allowMidManual: boolean
-  allowEasyManual: boolean
+  allowManual: boolean
   timeRequiredLower: number
   timeRequiredUpper: number
   accidentRateCondition: number
@@ -41,9 +39,7 @@ const initialState: SearchState = {
   damageCondition: 0,
   allowFullAuto: true,
   allowSemiAuto: true,
-  allowDifficultManual: true,
-  allowMidManual: true,
-  allowEasyManual: true,
+  allowManual: true,
   timeRequiredLower: 0,
   timeRequiredUpper: FULL_BATTLE_TIME,
   updateDateLimit: 0,
@@ -99,14 +95,8 @@ export const slice = createSlice({
     toggleAllowSemiAuto: (state) => {
       state.allowSemiAuto = !state.allowSemiAuto
     },
-    toggleAllowDifficultManual: (state) => {
-      state.allowDifficultManual = !state.allowDifficultManual
-    },
-    toggleAllowMidManual: (state) => {
-      state.allowMidManual = !state.allowMidManual
-    },
-    toggleAllowEasyManual: (state) => {
-      state.allowEasyManual = !state.allowEasyManual
+    toggleAllowManual: (state) => {
+      state.allowManual = !state.allowManual
     },
     changeTimeRequiredLower: (state, action: PayloadAction<number>) => {
       state.timeRequiredLower = action.payload
@@ -146,11 +136,7 @@ const filters = (conditions: SearchState) => [
   (d: DBTLDataType) =>
     (d.tl.operation === 'fullAuto' && conditions.allowFullAuto) ||
     (d.tl.operation === 'semiAuto' && conditions.allowSemiAuto) ||
-    (d.tl.operation === 'manual' &&
-      d.tl.difficulty === 'high' &&
-      conditions.allowDifficultManual) ||
-    (d.tl.operation === 'manual' && d.tl.difficulty === 'mid' && conditions.allowMidManual) ||
-    (d.tl.operation === 'manual' && d.tl.difficulty === 'low' && conditions.allowEasyManual),
+    (d.tl.operation === 'manual' && conditions.allowManual),
   (d: DBTLDataType) =>
     d.tl.startTime - d.tl.endTime >= conditions.timeRequiredLower &&
     d.tl.startTime - d.tl.endTime <= conditions.timeRequiredUpper,
@@ -174,9 +160,7 @@ export const {
   changeDamageCondition,
   toggleAllowFullAuto,
   toggleAllowSemiAuto,
-  toggleAllowDifficultManual,
-  toggleAllowMidManual,
-  toggleAllowEasyManual,
+  toggleAllowManual,
   changeTimeRequiredLower,
   changeTimeRequiredUpper,
   changeUpdateDateLimit,
@@ -208,10 +192,7 @@ export const selectLikeNumCondition = (state: AppState): number => state.search.
 export const selectDamageCondition = (state: AppState): number => state.search.damageCondition
 export const selectAllowFullAuto = (state: AppState): boolean => state.search.allowFullAuto
 export const selectAllowSemiAuto = (state: AppState): boolean => state.search.allowSemiAuto
-export const selectAllowDifficultManual = (state: AppState): boolean =>
-  state.search.allowDifficultManual
-export const selectAllowMidManual = (state: AppState): boolean => state.search.allowMidManual
-export const selectAllowEasyManual = (state: AppState): boolean => state.search.allowEasyManual
+export const selectAllowManual = (state: AppState): boolean => state.search.allowManual
 export const selectTimeRequiredLower = (state: AppState): number => state.search.timeRequiredLower
 export const selectTimeRequiredUpper = (state: AppState): number => state.search.timeRequiredUpper
 export const selectAccidentRateCondition = (state: AppState): number =>
