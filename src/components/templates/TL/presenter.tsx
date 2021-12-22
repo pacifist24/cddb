@@ -9,7 +9,6 @@ import DamageInput from 'components/organizms/TL/DamageInput'
 import CommentInput from 'components/organizms/TL/CommentInput'
 import UBsInput from 'components/organizms/TL/UBsInput'
 import SaveTLToFavsButton from 'components/organizms/TL/SaveTLToFavsButton'
-import AccidentRateInput from 'components/organizms/TL/AccidentRateInput'
 import OperationTypeInput from 'components/organizms/TL/OperationTypeInput'
 import SaveTLToServer from 'components/organizms/TL/SaveTLToServer'
 
@@ -36,9 +35,6 @@ const Presenter: VFC = () => (
           <OperationTypeInput />
         </div>
         <DamageInput />
-      </div>
-      <div className="flex mt-6">
-        <AccidentRateInput />
       </div>
       <div className="mt-3">
         <CommentInput />

@@ -31,7 +31,6 @@ export type TLState = {
   comment: string
   tlId: string | null
   updateDateUTC: number | null
-  accidentRate: number
   operation: OperationType
   requireTool: boolean
 }
@@ -47,7 +46,6 @@ const initialState: TLState = {
   comment: '',
   tlId: null,
   updateDateUTC: null,
-  accidentRate: 0,
   operation: 'manual',
   requireTool: false,
 }
@@ -56,9 +54,6 @@ export const slice = createSlice({
   name: 'tl',
   initialState,
   reducers: {
-    changeAccidentRate: (state, action: PayloadAction<number>) => {
-      state.accidentRate = action.payload
-    },
     changeOperation: (state, action: PayloadAction<OperationType>) => {
       state.operation = action.payload
     },
@@ -141,7 +136,6 @@ export const slice = createSlice({
       state.endTime = action.payload.endTime
       state.tlId = action.payload.tlId
       state.updateDateUTC = action.payload.updateDateUTC
-      state.accidentRate = action.payload.accidentRate
       state.operation = action.payload.operation
       state.requireTool = action.payload.requireTool
     },
@@ -157,7 +151,6 @@ export const slice = createSlice({
       state.endTime = initialState.endTime
       state.tlId = initialState.tlId
       state.updateDateUTC = initialState.updateDateUTC
-      state.accidentRate = initialState.accidentRate
       state.operation = initialState.operation
       state.requireTool = initialState.requireTool
     },
@@ -187,7 +180,6 @@ export const {
   sanitizeUB,
   loadTL,
   initializeTL,
-  changeAccidentRate,
   changeOperation,
   changeRequireTool,
 } = slice.actions
@@ -202,7 +194,6 @@ export const selectIsUBsInputVisible = (state: AppState): boolean =>
 export const selectHasTlId = (state: AppState): boolean => state.tl.tlId != null
 export const selectTimestamp = (state: AppState): Date => new Date(state.tl.updateDateUTC)
 
-export const selectAccidentRate = (state: AppState): number => state.tl.accidentRate
 export const selectBossName = (state: AppState): string => state.tl.bossName
 export const selectDamage = (state: AppState): number => state.tl.damage
 export const selectOperation = (state: AppState): OperationType => state.tl.operation

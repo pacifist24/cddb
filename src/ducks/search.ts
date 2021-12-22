@@ -26,7 +26,6 @@ export type SearchState = {
   allowManual: boolean
   timeRequiredLower: number
   timeRequiredUpper: number
-  accidentRateCondition: number
   excludedCharacters: string[]
 }
 
@@ -43,7 +42,6 @@ const initialState: SearchState = {
   timeRequiredLower: 0,
   timeRequiredUpper: FULL_BATTLE_TIME,
   updateDateLimit: 0,
-  accidentRateCondition: 100,
   excludedCharacters: [],
 }
 
@@ -107,9 +105,6 @@ export const slice = createSlice({
     changeUpdateDateLimit: (state, action: PayloadAction<number>) => {
       state.updateDateLimit = action.payload
     },
-    changeAccidentRateCondition: (state, action: PayloadAction<number>) => {
-      state.accidentRateCondition = action.payload
-    },
     addExcludedCharacter: (state, action: PayloadAction<string>) => {
       state.excludedCharacters.push(action.payload)
     },
@@ -140,7 +135,6 @@ const filters = (conditions: SearchState) => [
   (d: DBTLDataType) =>
     d.tl.startTime - d.tl.endTime >= conditions.timeRequiredLower &&
     d.tl.startTime - d.tl.endTime <= conditions.timeRequiredUpper,
-  (d: DBTLDataType) => d.tl.accidentRate <= conditions.accidentRateCondition,
   (d: DBTLDataType) =>
     d.tl.characters.reduce(
       (currentValue, character) =>
@@ -164,7 +158,6 @@ export const {
   changeTimeRequiredLower,
   changeTimeRequiredUpper,
   changeUpdateDateLimit,
-  changeAccidentRateCondition,
   addExcludedCharacter,
   removeExcludedCharacter,
   changePhaseCondition,
@@ -195,8 +188,6 @@ export const selectAllowSemiAuto = (state: AppState): boolean => state.search.al
 export const selectAllowManual = (state: AppState): boolean => state.search.allowManual
 export const selectTimeRequiredLower = (state: AppState): number => state.search.timeRequiredLower
 export const selectTimeRequiredUpper = (state: AppState): number => state.search.timeRequiredUpper
-export const selectAccidentRateCondition = (state: AppState): number =>
-  state.search.accidentRateCondition
 export const selectExcludedCharacters = (state: AppState): string[] =>
   state.search.excludedCharacters
 export const selectPhaseCondition = (state: AppState): number => state.search.phaseCondition
