@@ -88,6 +88,7 @@ export const calcAttackRoutes = (
   attackNum: number, // 何凸分のルートを計算するか
   doesCalcRest: boolean, // 持ち越しルートも計算するか
   excludedCharacters: string[], // 検索対象から外すキャラ
+  mustContainsBossName: string, // 凸ルートに含めなくてはいけないボス
 ): { routes: string[][]; tlDic: { [key: string]: TLState } } => {
   /* 例えばオウカ、ユカリ、ネネカ、キャル、ルナという編成があったら
   オウカ、ユカリ、ネネカ、キャルのようにサポートを除いた4キャラの組み合わせを5つ作る */
@@ -197,8 +198,8 @@ export const calcAttackRoutes = (
     tlDic[tl.tlId] = tl
   })
 
-  // 数が多いと表示に困るのでダメージが出る順に並び変える
-  const bestOfNRoutes = Object.keys(routes)
+  // ダメージが出る順に並び変える
+  const bestRoutes = Object.keys(routes)
     .sort((key1, key2) => {
       const route1 = routes[key1]
       const route2 = routes[key2]
@@ -214,9 +215,19 @@ export const calcAttackRoutes = (
       return damage2 - damage1
     })
     .map((routesId) => routes[routesId])
-  // .slice(0, 100000) // とりあえず100000にしとく
+    // 必須のボスを通らないルートを除去
+    .filter(
+      (route) =>
+        mustContainsBossName === '' ||
+        route.reduce(
+          (prev, current) =>
+            prev || (tlDic[current] && tlDic[current].bossName === mustContainsBossName),
+          false,
+        ),
+    )
+
   return {
-    routes: bestOfNRoutes,
+    routes: bestRoutes,
     tlDic,
   }
 }

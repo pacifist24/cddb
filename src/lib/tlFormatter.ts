@@ -51,6 +51,7 @@ const makePaddedNameList = (
   return resultList
 }
 
+/** TL情報から画面右に表示されるTL詳細用の文字列を生成する */
 const formatTL = (
   tlData: TLState,
   nameConversionTable: { [key: string]: string },
@@ -157,17 +158,6 @@ const formatTL = (
       i += 1
     }
   }
-  // tlTextLines = tlTextLines.concat(
-  //   tlData.timeline.map((line) => {
-  //     if (line.name === tlData.bossName) {
-  //       return `--- ${timeNum2Str(line.time, true)} BOSS --- ${line.comment}`;
-  //     }
-
-  //     return `${timeNum2Str(line.time, true)} ${paddedNameList[line.name]} ${
-  //       line.comment
-  //     }`;
-  //   }),
-  // );
   tlTextLines.push('　')
   tlTextLines.push(
     `<${timeNum2Str(tlData.endTime - lessTime > 0 ? tlData.endTime - lessTime : 0).substr(

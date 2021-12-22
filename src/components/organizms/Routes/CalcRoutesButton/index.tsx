@@ -5,6 +5,7 @@ import {
   selectAttackNum,
   selectDoesCalcRest,
   selectExcludedCharacters,
+  selectBossNameMustContains,
 } from 'ducks/routes'
 import { selectFavsByGroupName } from 'ducks/favs'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
@@ -17,11 +18,18 @@ const CalcRoutesButton: VFC = () => {
   const tls = useAppSelector(selectFavsByGroupName(groupName))
   const attackNum = useAppSelector(selectAttackNum)
   const doesCalcRest = useAppSelector(selectDoesCalcRest)
+  const bossNameMustContains = useAppSelector(selectBossNameMustContains)
   const excludedCharacters = useAppSelector(selectExcludedCharacters)
   const [isProcessing, setIsProcessing] = useState(false)
   const onClick = () => {
     setIsProcessing(true)
-    const { routes, tlDic } = calcAttackRoutes(tls, attackNum, doesCalcRest, excludedCharacters)
+    const { routes, tlDic } = calcAttackRoutes(
+      tls,
+      attackNum,
+      doesCalcRest,
+      excludedCharacters,
+      bossNameMustContains,
+    )
     const result = routes.map((route) => ({
       attack1: route[0],
       rest1: route[1],

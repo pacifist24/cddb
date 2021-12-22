@@ -2,7 +2,7 @@ import { TLState } from 'ducks/tl'
 import { timeStr2Num, getDefaultSpecialLv, generateTLId } from 'lib/util'
 import { CHARACTERS_INFO } from 'lib/gameConstants'
 
-// プリコネのTL書き出し機能により出力された文字列から情報を抜き出す
+/** プリコネのTL書き出し機能により出力された文字列から情報を抜き出す */
 const parseTlData = (text: string): TLState | null => {
   const generateLineReader = () => {
     const lines: string[] = text.split(/\r\n|\n/).filter((line: string) => line !== '')

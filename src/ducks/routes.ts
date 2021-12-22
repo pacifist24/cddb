@@ -20,11 +20,13 @@ export type RoutesState = {
     attackNum: number
     doesCalcRest: boolean
     excludedCharacters: string[]
+    bossNameMustContains: string
   }
   groupName: string // 凸ルートを計算するTL保管のグループ
   attackNum: number // 何凸分のルートを計算するか
   doesCalcRest: boolean // 持ち越しルートも計算するか
   excludedCharacters: string[] // 検索対象から外すキャラ
+  bossNameMustContains: string // 凸ルートに含めなくてはいけないボス
 }
 
 const initialState: RoutesState = {
@@ -35,11 +37,13 @@ const initialState: RoutesState = {
     attackNum: 3,
     doesCalcRest: false,
     excludedCharacters: [],
+    bossNameMustContains: '',
   },
   groupName: '',
   attackNum: 3,
   doesCalcRest: false,
   excludedCharacters: [],
+  bossNameMustContains: '',
 }
 
 export const slice = createSlice({
@@ -64,6 +68,7 @@ export const slice = createSlice({
         attackNum: state.attackNum,
         doesCalcRest: state.doesCalcRest,
         excludedCharacters: state.excludedCharacters,
+        bossNameMustContains: state.bossNameMustContains,
       }
       state.routes = action.payload.routes
       state.tlDic = action.payload.tlDic
@@ -83,6 +88,9 @@ export const slice = createSlice({
         state.excludedCharacters.push(action.payload)
       }
     },
+    changeBossNameMustContains: (state, action: PayloadAction<string>) => {
+      state.bossNameMustContains = action.payload
+    },
   },
 })
 
@@ -94,6 +102,7 @@ export const {
   changeAttackNum,
   toggleDoesCalcRest,
   toggleExcludedCharacter,
+  changeBossNameMustContains,
 } = slice.actions
 export const selectRoutes = (state: AppState): RouteState[] => state.routes.routes
 export const selectTLDic = (state: AppState): { [tlId: string]: TLState } => state.routes.tlDic
@@ -106,4 +115,6 @@ export const selectCalculatedAttackNumConditions = (state: AppState): number =>
   state.routes.calculatedConditions.attackNum
 export const selectCalculatedDoesCalcRestConditions = (state: AppState): boolean =>
   state.routes.calculatedConditions.doesCalcRest
+export const selectBossNameMustContains = (state: AppState): string =>
+  state.routes.bossNameMustContains
 export default slice.reducer

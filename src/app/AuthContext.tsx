@@ -29,7 +29,7 @@ export const AuthProvider: FC = ({ children }) => {
     })
   }, [])
 
-  /* 下階層のコンポーネントをラップする */
+  // 下階層のコンポーネントをラップする
   return <AuthContext.Provider value={memorizedCurrrentUser}>{children}</AuthContext.Provider>
 }
 

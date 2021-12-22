@@ -8,6 +8,7 @@ import GroupNameInput from './GroupNameInput'
 import AttackNumRadio from './AttackNumRadio'
 import DoesCalcRestCheckbox from './DoesCalcRestCheckbox'
 import ExcludedCharactersSelectButton from './ExcludedCharactersSelectButton'
+import BossNameMustContainsInput from './BossNameMustContainsInput'
 
 const CalcRoutesConditionsInput: VFC = () => (
   <Accordion>
@@ -19,8 +20,11 @@ const CalcRoutesConditionsInput: VFC = () => (
       <Typography>凸ルート検索条件設定</Typography>
     </AccordionSummary>
     <AccordionDetails>
-      <div className="">
+      <div>
         <GroupNameInput />
+      </div>
+      <div className="mt-3">
+        <BossNameMustContainsInput />
       </div>
       <div className="mt-3">
         <AttackNumRadio />
