@@ -1,16 +1,11 @@
 import { VFC, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import {
-  selectSearchResults,
-  DBTLDataType,
-  removeSearchResult,
-  doFav as doFavLocal,
-} from 'ducks/search'
+import { selectSearchResults, DBTLDataType, removeSearchResult } from 'ducks/search'
 import { addFav } from 'ducks/favs'
 import { loadTL, TLState } from 'ducks/tl'
 import { useAuthContext } from 'app/AuthContext'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
-import { deleteTL, doFav, buildSaveIdFromData } from 'lib/dbRegistration'
+import { deleteTL } from 'lib/dbRegistration'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import { generateTLId } from 'lib/util'
 
@@ -65,26 +60,6 @@ const SearchResultList: VFC = () => {
         },
       },
     ]
-    const targetId = buildSaveIdFromData(searchResult)
-    if (!localStorage.getItem(targetId)) {
-      menuItems.push({
-        title: 'TLを高評価する',
-        func: async () => {
-          localStorage.setItem(targetId, 'true')
-          await doFav(searchResult)
-          dispatch(doFavLocal(searchResult))
-          openAlert({
-            message: 'TLを高評価しました',
-            severity: 'success',
-            duration: 1500,
-            anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'center',
-            },
-          })
-        },
-      })
-    }
 
     if (currentUser && currentUser.uid === searchResult.userId) {
       menuItems.push({
@@ -101,8 +76,8 @@ const SearchResultList: VFC = () => {
               {
                 label: 'OK',
                 handleClick: async () => {
-                  await deleteTL(searchResult.tl, currentUser)
-                  dispatch(removeSearchResult(searchResult))
+                  await deleteTL(searchResult.tl.tlId)
+                  dispatch(removeSearchResult(searchResult.tl.tlId))
                   openAlert({
                     message: 'TLを削除しました',
                     severity: 'warning',

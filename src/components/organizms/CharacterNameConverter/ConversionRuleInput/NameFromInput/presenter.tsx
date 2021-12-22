@@ -8,15 +8,15 @@ type Props = {
   items: SelectItemsType
 }
 
-const GroupInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
+const NameFromInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <SelectInput
     value={value}
     onChange={onChange}
-    label="グループ選択"
+    label="変換前キャラ名"
     disabled={disabled}
     items={items}
     className="w-52"
   />
 )
 
-export default GroupInput
+export default NameFromInput

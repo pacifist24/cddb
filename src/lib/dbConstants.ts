@@ -7,4 +7,4 @@ export const CONFIG = {
   appId: '1:559656893121:web:7fee465e79005784223240',
 }
 
-export const TL_COLLECTION_NAME = 'tls'
+export const TL_COLLECTION_NAME = 'tls2'

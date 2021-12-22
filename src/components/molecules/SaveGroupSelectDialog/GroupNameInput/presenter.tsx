@@ -8,7 +8,7 @@ type Props = {
   items: SelectItemsType
 }
 
-const GroupInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
+const GroupNameInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <SelectInput
     value={value}
     onChange={onChange}
@@ -19,4 +19,4 @@ const GroupInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   />
 )
 
-export default GroupInput
+export default GroupNameInput

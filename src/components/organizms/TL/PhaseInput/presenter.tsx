@@ -1,38 +1,22 @@
-import { VFC } from 'react'
-import { TextField } from '@mui/material'
-import { TLState } from 'ducks/tl'
-import { MAX_PHASE } from 'lib/gameConstants'
+import { VFC, ChangeEvent } from 'react'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  tl: TLState
-  handleChangePhase: (phase: number) => void
-  isCharactersSelected: boolean
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const PhaseInput: VFC<Props> = ({ tl, handleChangePhase, isCharactersSelected }) => (
-  <div className="flex items-center">
-    <div className="mr-1">
-      <TextField
-        label="段階"
-        variant="outlined"
-        size="small"
-        type="number"
-        inputProps={{ min: 1, max: MAX_PHASE }}
-        className="w-14"
-        value={tl.phase}
-        onChange={(e) => {
-          if (
-            !Number.isNaN(parseInt(e.target.value, 10)) &&
-            Number.isInteger(parseInt(e.target.value, 10))
-          ) {
-            handleChangePhase(parseInt(e.target.value, 10))
-          }
-        }}
-        disabled={!isCharactersSelected}
-      />
-    </div>
-    <div className="mr-3">段階目</div>
-  </div>
+const PhaseInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
+  <SelectInput
+    value={value}
+    onChange={onChange}
+    label="段階"
+    disabled={disabled}
+    items={items}
+    className="w-28"
+  />
 )
 
 export default PhaseInput

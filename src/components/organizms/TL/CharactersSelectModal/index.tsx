@@ -1,6 +1,6 @@
 import { VFC, useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectTL, selectCharacters, sanitizeUB } from 'ducks/tl'
+import { selectCharacters, changeCharacters, sanitizeUB } from 'ducks/tl'
 import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import { CHARACTERS_INFO, MAX_LV, MAX_RANK } from 'lib/gameConstants'
 import { getDefaultSpecialLv } from 'lib/util'
@@ -13,15 +13,15 @@ type Props = {
 
 const CharacterSelectModal: VFC<Props> = ({ isOpen, setIsOpen }) => {
   const dispatch = useAppDispatch()
-  const tl = useAppSelector(selectTL)
+  const characters = useAppSelector(selectCharacters)
 
   const [tempSelectedCharacters, setTempSelectedCharacters] = useState<string[]>([])
   const openAlert = useCommonAlertContext()
   useEffect(() => {
     setTempSelectedCharacters(
-      tl.characters.filter((character) => character.name !== '').map((character) => character.name),
+      characters.filter((character) => character.name !== '').map((character) => character.name),
     )
-  }, [tl.characters])
+  }, [characters])
 
   const toggleIsSelected = (name: string, isSelectedNow: boolean) => {
     if (isSelectedNow) {
@@ -46,7 +46,7 @@ const CharacterSelectModal: VFC<Props> = ({ isOpen, setIsOpen }) => {
       })
     } else {
       dispatch(
-        selectCharacters(
+        changeCharacters(
           tempSelectedCharacters
             .map((name) => ({
               name,

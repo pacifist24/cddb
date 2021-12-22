@@ -15,7 +15,7 @@ type Props = {
 const TLThumbnail: VFC<Props> = ({
   tl,
   menuItems = [],
-  favsNum = 0,
+  favsNum = undefined,
   authorProfile = undefined,
 }) => <Presenter tl={tl} menuItems={menuItems} favsNum={favsNum} authorProfile={authorProfile} />
 

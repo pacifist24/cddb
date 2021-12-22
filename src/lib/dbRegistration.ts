@@ -8,13 +8,9 @@ import { CONFIG, TL_COLLECTION_NAME } from 'lib/dbConstants'
 initializeApp(CONFIG)
 const db = getFirestore()
 
-export const buildSaveId = (tlId: string, user: User): string => tlId + user.uid
-export const buildSaveIdFromData = (data: DBTLDataType): string => data.tl.tlId + data.userId
-
 /** TLデータの存在チェック */
-export const checkExistence = async (tlId: string, user: User): Promise<boolean> => {
-  const id = buildSaveId(tlId, user)
-  const docRef = doc(db, TL_COLLECTION_NAME, id)
+export const checkExistence = async (tlId: string): Promise<boolean> => {
+  const docRef = doc(db, TL_COLLECTION_NAME, tlId)
   const docSnap = await getDoc(docRef)
   return docSnap.exists()
 }
@@ -35,8 +31,7 @@ export const saveTL = async (
         userId: user.uid,
         userPhotoURL: user.photoURL,
       }
-      const saveId = buildSaveId(newTLId, user)
-      await setDoc(doc(db, TL_COLLECTION_NAME, saveId), saveData)
+      await setDoc(doc(db, TL_COLLECTION_NAME, newTLId), saveData)
     } else {
       // 新規にデータを投稿する想定
       const saveData: DBTLDataType = {
@@ -46,8 +41,7 @@ export const saveTL = async (
         userId: user.uid,
         userPhotoURL: user.photoURL,
       }
-      const saveId = buildSaveId(tl.tlId, user)
-      await setDoc(doc(db, TL_COLLECTION_NAME, saveId), saveData)
+      await setDoc(doc(db, TL_COLLECTION_NAME, tl.tlId), saveData)
     }
   } catch (e) {
     console.error('Error adding document: ', e)
@@ -55,10 +49,9 @@ export const saveTL = async (
 }
 
 /** TLデータの更新 */
-export const updateTL = async (tl: TLState, user: User): Promise<void> => {
+export const updateTL = async (tl: TLState): Promise<void> => {
   try {
-    const saveId = buildSaveId(tl.tlId, user)
-    const docRef = doc(db, TL_COLLECTION_NAME, saveId)
+    const docRef = doc(db, TL_COLLECTION_NAME, tl.tlId)
     await updateDoc(docRef, {
       tl: { ...tl, updateDateUTC: Date.now() },
     })
@@ -68,25 +61,39 @@ export const updateTL = async (tl: TLState, user: User): Promise<void> => {
 }
 
 /** TLデータの削除 */
-export const deleteTL = async (tl: TLState, user: User): Promise<void> => {
-  const deleteId = buildSaveId(tl.tlId, user)
+export const deleteTL = async (tlId: string): Promise<void> => {
   try {
-    await deleteDoc(doc(db, TL_COLLECTION_NAME, deleteId))
+    await deleteDoc(doc(db, TL_COLLECTION_NAME, tlId))
   } catch (e) {
     console.error('Error updating document: ', e)
   }
 }
 
-/** TLにFavする */
-export const doFav = async (target: DBTLDataType): Promise<void> => {
-  const targetId = buildSaveIdFromData(target)
+/** TLに高評価する */
+export const doGoodEval = async (tlId: string): Promise<void> => {
   try {
-    const docRef = doc(db, TL_COLLECTION_NAME, targetId)
+    const docRef = doc(db, TL_COLLECTION_NAME, tlId)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
       const targetData = docSnap.data() as DBTLDataType
       await updateDoc(docRef, {
         fav: targetData.fav + 1,
+      })
+    }
+  } catch (e) {
+    console.error('Error updating document: ', e)
+  }
+}
+
+/** TLの高評価を取り消す */
+export const undoGoodEval = async (tlId: string): Promise<void> => {
+  try {
+    const docRef = doc(db, TL_COLLECTION_NAME, tlId)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      const targetData = docSnap.data() as DBTLDataType
+      await updateDoc(docRef, {
+        fav: targetData.fav - 1,
       })
     }
   } catch (e) {

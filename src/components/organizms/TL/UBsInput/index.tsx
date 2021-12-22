@@ -1,12 +1,24 @@
 import { VFC } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectTL, changeStartTime, changeEndTime, addUB, selectIsUBsInputVisible } from 'ducks/tl'
+import {
+  changeStartTime,
+  changeEndTime,
+  addUB,
+  selectIsUBsInputVisible,
+  selectTimeline,
+  selectStartTime,
+  selectEndTime,
+  selectCharacters,
+} from 'ducks/tl'
 import { changeStartTime as changeStyleStartTime } from 'ducks/style'
 import Presenter from './presenter'
 
 const UBsInput: VFC = () => {
   const dispatch = useAppDispatch()
-  const tl = useAppSelector(selectTL)
+  const ubs = useAppSelector(selectTimeline)
+  const startTime = useAppSelector(selectStartTime)
+  const endTime = useAppSelector(selectEndTime)
+  const characters = useAppSelector(selectCharacters)
   const isUBsInputVisible = useAppSelector(selectIsUBsInputVisible)
   const insertUBFirst = () =>
     dispatch(
@@ -14,8 +26,8 @@ const UBsInput: VFC = () => {
         index: 0,
         ub: {
           id: Math.random(),
-          time: tl.startTime,
-          name: tl.characters[0].name,
+          time: startTime,
+          name: characters[0].name,
           comment: '',
         },
       }),
@@ -27,9 +39,9 @@ const UBsInput: VFC = () => {
 
   return (
     <Presenter
-      ubs={tl.timeline}
-      startTime={tl.startTime}
-      endTime={tl.endTime}
+      ubs={ubs}
+      startTime={startTime}
+      endTime={endTime}
       isUBsInputVisible={isUBsInputVisible}
       changeStartTime={handleChangeStartTime}
       changeEndTime={(time) => dispatch(changeEndTime(time))}

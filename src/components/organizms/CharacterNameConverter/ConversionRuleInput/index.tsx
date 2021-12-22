@@ -14,8 +14,8 @@ const ConversionRuleInput: VFC = () => {
     <Presenter
       nameFrom={nameFrom}
       nameTo={nameTo}
-      changeNameFrom={setNameFrom}
-      changeNameTo={setNameTo}
+      setNameFrom={setNameFrom}
+      setNameTo={setNameTo}
       handleClickSubmit={handleDeleteNameConversionRule}
     />
   )

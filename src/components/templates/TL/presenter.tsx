@@ -28,7 +28,9 @@ const Presenter: VFC = () => (
       </div>
       <div className="flex mt-12">
         <PhaseInput />
-        <BossNameInput />
+        <div className="ml-2">
+          <BossNameInput />
+        </div>
       </div>
       <div className="flex mt-6">
         <div className="mr-2">

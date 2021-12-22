@@ -89,7 +89,7 @@ export const slice = createSlice({
     changeComment: (state, action: PayloadAction<string>) => {
       state.comment = action.payload
     },
-    selectCharacters: (state, action: PayloadAction<Character[]>) => {
+    changeCharacters: (state, action: PayloadAction<Character[]>) => {
       state.characters = action.payload
     },
     changeCharacterName: (state, action: PayloadAction<{ index: number; value: string }>) => {
@@ -191,7 +191,7 @@ export const {
   changeTLId,
   addUB,
   deleteUB,
-  selectCharacters,
+  changeCharacters,
   sanitizeUB,
   loadTL,
   initializeTL,
@@ -210,4 +210,16 @@ export const selectIsUBsInputVisible = (state: AppState): boolean =>
   state.tl.bossName !== '' && state.tl.characters.length === 5
 export const selectHasTlId = (state: AppState): boolean => state.tl.tlId != null
 export const selectTimestamp = (state: AppState): Date => new Date(state.tl.updateDateUTC)
+
+export const selectAccidentRate = (state: AppState): number => state.tl.accidentRate
+export const selectBossName = (state: AppState): string => state.tl.bossName
+export const selectDamage = (state: AppState): number => state.tl.damage
+export const selectDifficulty = (state: AppState): DifficultyType => state.tl.difficulty
+export const selectOperation = (state: AppState): OperationType => state.tl.operation
+export const selectPhase = (state: AppState): number => state.tl.phase
+export const selectCharacters = (state: AppState): Character[] => state.tl.characters
+export const selectComment = (state: AppState): string => state.tl.comment
+export const selectTimeline = (state: AppState): UB[] => state.tl.timeline
+export const selectStartTime = (state: AppState): number => state.tl.startTime
+export const selectEndTime = (state: AppState): number => state.tl.endTime
 export default slice.reducer

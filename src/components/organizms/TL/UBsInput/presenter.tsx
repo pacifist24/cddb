@@ -43,7 +43,7 @@ const UBsInput: VFC<Props> = ({
           <UBInput index={index} key={ub.id} />
         ))}
         <div className="mt-2 font-bold">
-          ---{' '}
+          ---
           <span className="mr-1">
             <TimeInput
               time={endTime}

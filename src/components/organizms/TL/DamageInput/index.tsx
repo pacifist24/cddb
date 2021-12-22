@@ -1,20 +1,16 @@
-import { VFC } from 'react'
+import { VFC, ChangeEvent } from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectTL, changeDamage, selectIsCharactersSelected } from 'ducks/tl'
+import { selectDamage, changeDamage, selectIsCharactersSelected } from 'ducks/tl'
 import Presenter from './presenter'
 
 const DamageInput: VFC = () => {
   const dispatch = useAppDispatch()
-  const tl = useAppSelector(selectTL)
+  const damage = useAppSelector(selectDamage)
   const isCharactersSelected = useAppSelector(selectIsCharactersSelected)
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    dispatch(changeDamage(parseInt(e.target.value, 10)))
 
-  return (
-    <Presenter
-      tl={tl}
-      changeDamage={(damage) => dispatch(changeDamage(damage))}
-      isCharactersSelected={isCharactersSelected}
-    />
-  )
+  return <Presenter value={damage} onChange={onChange} disabled={!isCharactersSelected} />
 }
 
 export default DamageInput

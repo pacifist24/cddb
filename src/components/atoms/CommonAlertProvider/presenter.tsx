@@ -18,7 +18,7 @@ type Props = {
   handleClose: () => void
 }
 
-const AlertTemplate: VFC<Props> = ({ commonAlertState, handleClose }) => (
+const Presenter: VFC<Props> = ({ commonAlertState, handleClose }) => (
   <Snackbar
     open={commonAlertState.isOpen}
     autoHideDuration={commonAlertState.duration}
@@ -31,4 +31,4 @@ const AlertTemplate: VFC<Props> = ({ commonAlertState, handleClose }) => (
   </Snackbar>
 )
 
-export default AlertTemplate
+export default Presenter

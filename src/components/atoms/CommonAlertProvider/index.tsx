@@ -1,5 +1,5 @@
 import { FC, createContext, useState, useContext, useMemo } from 'react'
-import AlertTemplate, { CommonAlertState } from './AlertTemplate'
+import AlertTemplate, { CommonAlertState } from './presenter'
 
 type CommonAlertEventHandlerType = (state: Omit<CommonAlertState, 'isOpen'>) => void
 

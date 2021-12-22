@@ -1,27 +1,22 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { TLState, OperationType } from 'ducks/tl'
+import { VFC, ChangeEvent } from 'react'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  tl: TLState
-  changeOperation: (operation: OperationType) => void
-  isCharactersSelected: boolean
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const OperationTypeInput: VFC<Props> = ({ tl, changeOperation, isCharactersSelected }) => (
-  <FormControl size="small" variant="outlined" className="mr-2 w-36">
-    <InputLabel>操作種別</InputLabel>
-    <Select
-      value={tl.operation}
-      label="操作種別"
-      onChange={(e: SelectChangeEvent) => changeOperation(e.target.value as OperationType)}
-      disabled={!isCharactersSelected}
-    >
-      <MenuItem value="manual">マニュアル</MenuItem>
-      <MenuItem value="semiAuto">セミオート</MenuItem>
-      <MenuItem value="fullAuto">フルオート</MenuItem>
-    </Select>
-  </FormControl>
+const OperationTypeInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
+  <SelectInput
+    value={value}
+    onChange={onChange}
+    label="操作種別"
+    disabled={disabled}
+    items={items}
+    className="w-36"
+  />
 )
 
 export default OperationTypeInput

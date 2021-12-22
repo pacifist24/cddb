@@ -1,6 +1,4 @@
 import { VFC } from 'react'
-import { selectGroupList } from 'ducks/favs'
-import { useAppSelector } from 'app/hooks'
 import Presenter from './presenter'
 
 type Props = {
@@ -19,20 +17,15 @@ const SaveGroupSelectDialog: VFC<Props> = ({
   handleChangeGroupName,
   handleClickOK,
   handleClickCancel,
-}) => {
-  const groupList = useAppSelector(selectGroupList)
-
-  return (
-    <Presenter
-      isOpen={isOpen}
-      groupList={groupList}
-      groupName={groupName}
-      handleChangeGroupName={handleChangeGroupName}
-      handleClose={() => setIsOpen(false)}
-      handleClickOK={handleClickOK}
-      handleClickCancel={handleClickCancel}
-    />
-  )
-}
+}) => (
+  <Presenter
+    isOpen={isOpen}
+    groupName={groupName}
+    handleChangeGroupName={handleChangeGroupName}
+    handleClose={() => setIsOpen(false)}
+    handleClickOK={handleClickOK}
+    handleClickCancel={handleClickCancel}
+  />
+)
 
 export default SaveGroupSelectDialog

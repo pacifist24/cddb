@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import { selectTL, selectIsCharactersSelected, Character } from 'ducks/tl'
+import { selectCharacters, selectIsCharactersSelected, Character } from 'ducks/tl'
 import { useAppSelector } from 'app/hooks'
 import { MAX_LV, MAX_RANK, MAX_STAR } from 'lib/gameConstants'
 import CharactersInputComponent from './presenter'
@@ -13,10 +13,10 @@ const DEFAULT_CHARACTERS: Character[] = [
 ]
 
 const CharactersInput: VFC = () => {
-  const tl = useAppSelector(selectTL)
+  const characters = useAppSelector(selectCharacters)
   const isCharactersSelected = useAppSelector(selectIsCharactersSelected)
   if (isCharactersSelected) {
-    return <CharactersInputComponent characters={tl.characters} />
+    return <CharactersInputComponent characters={characters} />
   }
   return <CharactersInputComponent characters={DEFAULT_CHARACTERS} />
 }

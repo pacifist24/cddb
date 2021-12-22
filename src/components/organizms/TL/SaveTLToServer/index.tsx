@@ -9,7 +9,6 @@ import { useAuthContext } from 'app/AuthContext'
 import Presenter from './presenter'
 
 const SaveTLToServer: VFC = () => {
-  // const dispatch = useAppDispatch()
   const tl = useAppSelector(selectTL)
   const openAlert = useCommonAlertContext()
   const currentUser = useAuthContext().currentUser
@@ -40,7 +39,7 @@ const SaveTLToServer: VFC = () => {
     {
       label: '更新する',
       handleClick: async () => {
-        await updateTL(tl, currentUser)
+        await updateTL(tl)
         openAlert({
           message: 'サーバー上のTLを更新しました。',
           severity: 'success',
@@ -77,7 +76,7 @@ const SaveTLToServer: VFC = () => {
   ]
 
   const onClick = async () => {
-    const existTL = await checkExistence(tl.tlId, currentUser)
+    const existTL = await checkExistence(tl.tlId)
     if (existTL) {
       openDialog({
         title: 'サーバーにTLを公開',

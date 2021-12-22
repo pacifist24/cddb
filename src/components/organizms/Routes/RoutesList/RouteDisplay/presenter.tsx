@@ -28,7 +28,7 @@ const RouteDisplay: VFC<Props> = ({
       <TLThumbnail
         tl={tlDic[route.attack1]}
         menuItems={makeMenuItems(tlDic[route.attack1])}
-        favsNum={0}
+        favsNum={undefined}
         authorProfile={undefined}
       />
     </div>
@@ -38,7 +38,7 @@ const RouteDisplay: VFC<Props> = ({
           <TLThumbnail
             tl={tlDic[route.rest1]}
             menuItems={route.rest1 ? makeMenuItems(tlDic[route.rest1]) : []}
-            favsNum={0}
+            favsNum={undefined}
             authorProfile={undefined}
           />
         )}
@@ -55,7 +55,7 @@ const RouteDisplay: VFC<Props> = ({
           <TLThumbnail
             tl={tlDic[route.attack2]}
             menuItems={makeMenuItems(tlDic[route.attack2])}
-            favsNum={0}
+            favsNum={undefined}
             authorProfile={undefined}
           />
         </div>
@@ -67,7 +67,7 @@ const RouteDisplay: VFC<Props> = ({
           <TLThumbnail
             tl={tlDic[route.rest2]}
             menuItems={route.rest2 ? makeMenuItems(tlDic[route.rest2]) : []}
-            favsNum={0}
+            favsNum={undefined}
             authorProfile={undefined}
           />
         )}
@@ -83,7 +83,7 @@ const RouteDisplay: VFC<Props> = ({
           <TLThumbnail
             tl={tlDic[route.attack3]}
             menuItems={makeMenuItems(tlDic[route.attack3])}
-            favsNum={0}
+            favsNum={undefined}
             authorProfile={undefined}
           />
         </div>
@@ -95,7 +95,7 @@ const RouteDisplay: VFC<Props> = ({
           <TLThumbnail
             tl={tlDic[route.rest3]}
             menuItems={route.rest3 ? makeMenuItems(tlDic[route.rest3]) : []}
-            favsNum={0}
+            favsNum={undefined}
             authorProfile={undefined}
           />
         )}

@@ -1,30 +1,22 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-import { TLState } from 'ducks/tl'
-import { BOSSES_INFO } from 'lib/gameConstants'
+import { VFC, ChangeEvent } from 'react'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  tl: TLState
-  changeBossName: (bossName: string) => void
-  isCharactersSelected: boolean
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const BossNameInput: VFC<Props> = ({ tl, changeBossName, isCharactersSelected }) => (
-  <FormControl size="small" variant="outlined" className="w-52">
-    <InputLabel>ボス名</InputLabel>
-    <Select
-      value={tl.bossName}
-      label="ボス名"
-      onChange={(e) => changeBossName(e.target.value)}
-      disabled={!isCharactersSelected}
-    >
-      {Object.keys(BOSSES_INFO).map((name) => (
-        <MenuItem value={name} key={name}>
-          {name}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
+const BossNameInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
+  <SelectInput
+    value={value}
+    onChange={onChange}
+    label="ボス名"
+    disabled={disabled}
+    items={items}
+    className="w-52"
+  />
 )
 
 export default BossNameInput

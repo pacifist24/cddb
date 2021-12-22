@@ -9,7 +9,8 @@ import {
 
 import Presenter from './presenter'
 
-const calcItemSize = (attackNum, calcRest): number => {
+// 無限スクロールライブラリのFixedSizeListコンポーネントの要素サイズの計算用
+const calcItemSize = (attackNum: number, calcRest: boolean): number => {
   if (attackNum === 3) {
     if (calcRest) {
       return 730

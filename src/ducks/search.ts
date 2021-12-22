@@ -58,20 +58,28 @@ export const slice = createSlice({
     setSearchResults: (state, action: PayloadAction<DBTLDataType[]>) => {
       state.searchResults = action.payload
     },
-    removeSearchResult: (state, action: PayloadAction<DBTLDataType>) => {
+    removeSearchResult: (state, action: PayloadAction<string>) => {
       state.searchResults = state.searchResults.filter(
-        (searchResult) =>
-          searchResult.tl.tlId !== action.payload.tl.tlId ||
-          searchResult.userId !== action.payload.userId,
+        (searchResult) => searchResult.tl.tlId !== action.payload,
       )
     },
-    doFav: (state, action: PayloadAction<DBTLDataType>) => {
+    doGoodEval: (state, action: PayloadAction<string>) => {
+      const target = {
+        ...state.searchResults.filter((searchResult) => searchResult.tl.tlId === action.payload)[0],
+      }
       state.searchResults = state.searchResults.filter(
-        (searchResult) =>
-          searchResult.tl.tlId !== action.payload.tl.tlId ||
-          searchResult.userId !== action.payload.userId,
+        (searchResult) => searchResult.tl.tlId !== action.payload,
       )
-      state.searchResults.push({ ...action.payload, fav: action.payload.fav + 1 })
+      state.searchResults.push({ ...target, fav: target.fav + 1 })
+    },
+    undoGoodEval: (state, action: PayloadAction<string>) => {
+      const target = {
+        ...state.searchResults.filter((searchResult) => searchResult.tl.tlId === action.payload)[0],
+      }
+      state.searchResults = state.searchResults.filter(
+        (searchResult) => searchResult.tl.tlId !== action.payload,
+      )
+      state.searchResults.push({ ...target, fav: target.fav - 1 })
     },
     changeSortKey: (state, action: PayloadAction<SortType>) => {
       state.sortKey = action.payload
@@ -158,7 +166,8 @@ const filters = (conditions: SearchState) => [
 export const {
   setSearchResults,
   removeSearchResult,
-  doFav,
+  doGoodEval,
+  undoGoodEval,
   changeSortKey,
   changeBossNameConditon,
   changeLikeNumCondition,

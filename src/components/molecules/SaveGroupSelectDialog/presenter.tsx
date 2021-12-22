@@ -6,16 +6,11 @@ import {
   DialogContent,
   DialogTitle,
   DialogContentText,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
 } from '@mui/material'
+import GroupNameInput from './GroupNameInput'
 
 type Props = {
   isOpen: boolean
-  groupList: string[]
   groupName: string
   handleChangeGroupName: (groupName: string) => void
   handleClose: () => void
@@ -25,7 +20,6 @@ type Props = {
 
 const SaveGroupSelectDialog: VFC<Props> = ({
   isOpen,
-  groupList,
   groupName,
   handleChangeGroupName,
   handleClose,
@@ -36,22 +30,9 @@ const SaveGroupSelectDialog: VFC<Props> = ({
     <DialogTitle>保存先グループの選択</DialogTitle>
     <DialogContent>
       <DialogContentText>保存先のグループを選択してください</DialogContentText>
-      <FormControl size="small" variant="outlined" className="mt-3 mr-2 w-52">
-        <InputLabel>グループ選択</InputLabel>
-        <Select
-          value={groupName}
-          label="グループ選択"
-          margin="dense"
-          onChange={(e: SelectChangeEvent) => handleChangeGroupName(e.target.value)}
-        >
-          <MenuItem value="">デフォルトグループ</MenuItem>
-          {groupList.map((item) => (
-            <MenuItem value={item} key={item}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div className="mt-3 mr-2">
+        <GroupNameInput groupName={groupName} setGroupName={handleChangeGroupName} />
+      </div>
     </DialogContent>
     <DialogActions>
       <Button onClick={handleClickCancel}>キャンセル</Button>

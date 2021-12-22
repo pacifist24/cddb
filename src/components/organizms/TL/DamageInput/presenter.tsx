@@ -1,36 +1,25 @@
-import { VFC } from 'react'
-import { TextField } from '@mui/material'
-import { TLState } from 'ducks/tl'
+import { VFC, ChangeEvent } from 'react'
 import { MAX_DAMAGE } from 'lib/gameConstants'
+import NumberInput from 'components/atoms/NumberInput'
 
 type Props = {
-  tl: TLState
-  changeDamage: (damage: number) => void
-  isCharactersSelected: boolean
+  value: number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
 }
 
-const DamageInput: VFC<Props> = ({ tl, changeDamage, isCharactersSelected }) => (
+const DamageInput: VFC<Props> = ({ value, onChange, disabled }) => (
   <div className="flex items-center">
     <div className="mr-1">
-      <TextField
+      <NumberInput
+        value={value}
         label="ダメージ"
-        variant="outlined"
-        inputProps={{
-          min: 0,
-          max: Math.floor(MAX_DAMAGE / 10000),
-          step: 100,
-        }}
+        onChange={onChange}
+        disabled={disabled}
         className="w-24"
-        value={tl.damage}
-        onChange={(e) => {
-          changeDamage(parseInt(e.target.value, 10))
-        }}
-        type="number"
-        size="small"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        disabled={!isCharactersSelected}
+        min={0}
+        max={MAX_DAMAGE}
+        step={100}
       />
     </div>
     万

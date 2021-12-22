@@ -1,30 +1,25 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem, FormLabel } from '@mui/material'
+import { VFC, ChangeEvent } from 'react'
+import { FormLabel } from '@mui/material'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  groupList: string[]
-  groupName: string
-  handleChangeGroupName: (groupName: string) => void
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const GroupNameInput: VFC<Props> = ({ groupList, groupName, handleChangeGroupName }) => (
+const GroupNameInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
     <FormLabel component="legend">検索対象グループ名:</FormLabel>
-    <FormControl size="small" variant="outlined" className="ml-3 w-52">
-      <InputLabel>グループ</InputLabel>
-      <Select
-        value={groupName}
-        label="グループ"
-        onChange={(e) => handleChangeGroupName(e.target.value)}
-      >
-        <MenuItem value="">デフォルトグループ</MenuItem>
-        {groupList.map((item) => (
-          <MenuItem value={item} key={item}>
-            {item}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <SelectInput
+      value={value}
+      onChange={onChange}
+      label="グループ"
+      disabled={disabled}
+      items={items}
+      className="ml-3 w-52"
+    />
   </div>
 )
 

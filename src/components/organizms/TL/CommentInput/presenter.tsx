@@ -1,14 +1,13 @@
-import { VFC } from 'react'
+import { VFC, ChangeEvent } from 'react'
 import { TextField } from '@mui/material'
-import { TLState } from 'ducks/tl'
 
 type Props = {
-  tl: TLState
-  changeComment: (comment: string) => void
-  isCharactersSelected: boolean
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
 }
 
-const TLScoreInfoInput: VFC<Props> = ({ tl, changeComment, isCharactersSelected }) => (
+const TLScoreInfoInput: VFC<Props> = ({ value, onChange, disabled }) => (
   <TextField
     margin="dense"
     className="w-11/12 max-w-md"
@@ -18,9 +17,9 @@ const TLScoreInfoInput: VFC<Props> = ({ tl, changeComment, isCharactersSelected 
     multiline
     minRows={2}
     maxRows={5}
-    value={tl.comment}
-    onChange={(e) => changeComment(e.target.value)}
-    disabled={!isCharactersSelected}
+    value={value}
+    onChange={onChange}
+    disabled={disabled}
   />
 )
 

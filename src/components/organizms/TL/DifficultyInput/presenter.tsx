@@ -1,29 +1,24 @@
-import { VFC } from 'react'
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { TLState, DifficultyType } from 'ducks/tl'
+import { VFC, ChangeEvent } from 'react'
+import SelectInput, { SelectItemsType } from 'components/atoms/SelectInput'
 
 type Props = {
-  tl: TLState
-  changeDifficulty: (difficulty: DifficultyType) => void
-  isCharactersSelected: boolean
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+  items: SelectItemsType
 }
 
-const AccidentRateInput: VFC<Props> = ({ tl, changeDifficulty, isCharactersSelected }) => (
+const AccidentRateInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
     <span className="mr-2">難易度</span>
-    <FormControl size="small" variant="outlined" className="w-20 mr-2">
-      <InputLabel>難易度</InputLabel>
-      <Select
-        value={tl.difficulty}
-        label="難易度"
-        onChange={(e: SelectChangeEvent) => changeDifficulty(e.target.value as DifficultyType)}
-        disabled={!isCharactersSelected}
-      >
-        <MenuItem value="low">低</MenuItem>
-        <MenuItem value="mid">中</MenuItem>
-        <MenuItem value="high">高</MenuItem>
-      </Select>
-    </FormControl>
+    <SelectInput
+      value={value}
+      onChange={onChange}
+      label="難易度"
+      disabled={disabled}
+      items={items}
+      className="w-20 mr-2"
+    />
   </div>
 )
 
