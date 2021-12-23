@@ -1,5 +1,5 @@
 import { VFC, useState } from 'react'
-import { fetchTlsData } from 'lib/dbAccess'
+import { fetchTlsDataFromBundle } from 'lib/dbAccess'
 import { setSearchResults } from 'ducks/search'
 import { useAppDispatch } from 'app/hooks'
 import Presenter from './presenter'
@@ -9,7 +9,7 @@ const SearchButton: VFC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const onClick = async () => {
     setIsLoading(true)
-    const data = await fetchTlsData()
+    const data = await fetchTlsDataFromBundle()
     dispatch(setSearchResults(data))
     setIsLoading(false)
   }

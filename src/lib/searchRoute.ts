@@ -91,8 +91,12 @@ export const calcAttackRoutes = (
   mustContainsBossName: string, // 凸ルートに含めなくてはいけないボス
 ): { routes: string[][]; tlDic: { [key: string]: TLState } } => {
   /* 例えばオウカ、ユカリ、ネネカ、キャル、ルナという編成があったら
-  オウカ、ユカリ、ネネカ、キャルのようにサポートを除いた4キャラの組み合わせを5つ作る */
-  const excludeSupportArray = calcExcludeSupportArray(tls)
+  オウカ、ユカリ、ネネカ、キャルのようにサポートを除いた4キャラの組み合わせを5つ作る
+  その後、使えないキャラを含む組み合わせを除去する */
+  const excludeSupportArray = calcExcludeSupportArray(tls).filter(
+    (excludeSupport) =>
+      !existCharacterDuplicate(excludeSupport.consumptionCharacters, excludedCharacters),
+  )
   /* 合計が90+20秒になるような本凸-持ち越し凸の組み合わせを全通り作る */
   const combination = calcCombinationOfAttackAndRest(excludeSupportArray, doesCalcRest)
 
@@ -102,41 +106,33 @@ export const calcAttackRoutes = (
     for (let i = 0; i < combination.length - 2; i += 1) {
       // 1凸目
       const attack1 = combination[i]
-      if (!existCharacterDuplicate(attack1.consumptionCharacters, excludedCharacters)) {
-        // キャラに重複が無い場合処理続行
-        for (let j = i + 1; j < combination.length - 1; j += 1) {
-          // 2凸目
-          const attack2 = combination[j]
-          if (
-            // キャラに重複が無い場合処理続行
-            !existCharacterDuplicate(
-              attack1.consumptionCharacters,
-              attack2.consumptionCharacters,
-              excludedCharacters,
-            )
-          ) {
-            for (let k = j + 1; k < combination.length; k += 1) {
-              // 3凸目
-              const attack3 = combination[k]
-              if (
-                // キャラに重複が無い場合処理続行
-                !existCharacterDuplicate(
-                  attack1.consumptionCharacters,
-                  attack2.consumptionCharacters,
-                  attack3.consumptionCharacters,
-                  excludedCharacters,
-                )
-              ) {
-                const routeIds = [
-                  attack1.idAttack, // 1凸目本凸のTLID
-                  attack1.idRest, // 1凸目持ち越し凸のTLID
-                  attack2.idAttack, // 2凸目本凸のTLID
-                  attack2.idRest, // 2凸目持ち越し凸のTLID
-                  attack3.idAttack, // 3凸目本凸のTLID
-                  attack3.idRest, // 3凸目持ち越し凸のTLID
-                ]
-                routes[routeIds.join()] = routeIds
-              }
+      for (let j = i + 1; j < combination.length - 1; j += 1) {
+        // 2凸目
+        const attack2 = combination[j]
+        if (
+          // キャラに重複が無い場合処理続行
+          !existCharacterDuplicate(attack1.consumptionCharacters, attack2.consumptionCharacters)
+        ) {
+          for (let k = j + 1; k < combination.length; k += 1) {
+            // 3凸目
+            const attack3 = combination[k]
+            if (
+              // キャラに重複が無い場合処理続行
+              !existCharacterDuplicate(
+                attack1.consumptionCharacters,
+                attack2.consumptionCharacters,
+                attack3.consumptionCharacters,
+              )
+            ) {
+              const routeIds = [
+                attack1.idAttack, // 1凸目本凸のTLID
+                attack1.idRest, // 1凸目持ち越し凸のTLID
+                attack2.idAttack, // 2凸目本凸のTLID
+                attack2.idRest, // 2凸目持ち越し凸のTLID
+                attack3.idAttack, // 3凸目本凸のTLID
+                attack3.idRest, // 3凸目持ち越し凸のTLID
+              ]
+              routes[routeIds.join()] = routeIds
             }
           }
         }
@@ -144,52 +140,42 @@ export const calcAttackRoutes = (
     }
   } else if (attackNum === 2) {
     // 2凸分計算する場合
-    for (let i = 0; i < combination.length - 2; i += 1) {
+    for (let i = 0; i < combination.length - 1; i += 1) {
       // 1凸目
       const attack1 = combination[i]
-      if (!existCharacterDuplicate(attack1.consumptionCharacters, excludedCharacters)) {
-        // キャラに重複が無い場合処理続行
-        for (let j = i + 1; j < combination.length - 1; j += 1) {
-          // 2凸目
-          const attack2 = combination[j]
-          if (
-            // キャラに重複が無い場合処理続行
-            !existCharacterDuplicate(
-              attack1.consumptionCharacters,
-              attack2.consumptionCharacters,
-              excludedCharacters,
-            )
-          ) {
-            const routeIds = [
-              attack1.idAttack, // 1凸目本凸のTLID
-              attack1.idRest, // 1凸目持ち越し凸のTLID
-              attack2.idAttack, // 2凸目本凸のTLID
-              attack2.idRest, // 2凸目持ち越し凸のTLID
-              '', // 3凸目本凸のTLID
-              '', // 3凸目持ち越し凸のTLID
-            ]
-            routes[routeIds.join()] = routeIds
-          }
+      for (let j = i + 1; j < combination.length; j += 1) {
+        // 2凸目
+        const attack2 = combination[j]
+        if (
+          // キャラに重複が無い場合処理続行
+          !existCharacterDuplicate(attack1.consumptionCharacters, attack2.consumptionCharacters)
+        ) {
+          const routeIds = [
+            attack1.idAttack, // 1凸目本凸のTLID
+            attack1.idRest, // 1凸目持ち越し凸のTLID
+            attack2.idAttack, // 2凸目本凸のTLID
+            attack2.idRest, // 2凸目持ち越し凸のTLID
+            '', // 3凸目本凸のTLID
+            '', // 3凸目持ち越し凸のTLID
+          ]
+          routes[routeIds.join()] = routeIds
         }
       }
     }
   } else {
     // 1凸計算する場合
-    for (let i = 0; i < combination.length - 2; i += 1) {
+    for (let i = 0; i < combination.length; i += 1) {
       // 1凸目
       const attack1 = combination[i]
-      if (!existCharacterDuplicate(attack1.consumptionCharacters, excludedCharacters)) {
-        // キャラに重複が無い場合処理続行
-        const routeIds = [
-          attack1.idAttack, // 1凸目本凸のTLID
-          attack1.idRest, // 1凸目持ち越し凸のTLID
-          '', // 2凸目本凸のTLID
-          '', // 2凸目持ち越し凸のTLID
-          '', // 3凸目本凸のTLID
-          '', // 3凸目持ち越し凸のTLID
-        ]
-        routes[routeIds.join()] = routeIds
-      }
+      const routeIds = [
+        attack1.idAttack, // 1凸目本凸のTLID
+        attack1.idRest, // 1凸目持ち越し凸のTLID
+        '', // 2凸目本凸のTLID
+        '', // 2凸目持ち越し凸のTLID
+        '', // 3凸目本凸のTLID
+        '', // 3凸目持ち越し凸のTLID
+      ]
+      routes[routeIds.join()] = routeIds
     }
   }
   // tlsを辞書型に変換

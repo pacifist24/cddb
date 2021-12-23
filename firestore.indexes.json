@@ -1,0 +1,33 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "tls",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "tl.updateDateUTC",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "fav",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tls2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "tl.updateDateUTC",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "fav",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

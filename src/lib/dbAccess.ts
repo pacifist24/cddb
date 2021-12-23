@@ -5,11 +5,13 @@ import {
   doc,
   updateDoc,
   deleteDoc,
-  getDocs,
-  collection,
-  limit,
-  orderBy,
-  query,
+  getDocsFromCache,
+  // collection,
+  // limit,
+  // orderBy,
+  // query,
+  loadBundle,
+  namedQuery,
 } from 'firebase/firestore'
 import { TLState } from 'ducks/tl'
 import { initializeApp } from 'firebase/app'
@@ -114,13 +116,22 @@ export const undoGoodEval = async (tlId: string): Promise<void> => {
 }
 
 /** TLを検索する */
-export const fetchTlsData = async (limitNum = 1000): Promise<DBTLDataType[]> => {
-  const q = query(
-    collection(db, TL_COLLECTION_NAME),
-    orderBy('tl.updateDateUTC', 'desc'),
-    orderBy('fav', 'desc'),
-    limit(limitNum),
-  )
-  const querySnapshot = await getDocs(q)
+// export const fetchTlsData = async (limitNum = 1000): Promise<DBTLDataType[]> => {
+//   const q = query(
+//     collection(db, TL_COLLECTION_NAME),
+//     orderBy('tl.updateDateUTC', 'desc'),
+//     orderBy('fav', 'desc'),
+//     limit(limitNum),
+//   )
+//   const querySnapshot = await getDocs(q)
+//   return querySnapshot.docs.map((doc) => doc.data()) as DBTLDataType[]
+// }
+
+/** バンドル化されたTLを取得する */
+export const fetchTlsDataFromBundle = async (): Promise<DBTLDataType[]> => {
+  const resp = await fetch('https://clanbattledb.web.app/createBundle')
+  await loadBundle(db, resp.body)
+  const query = await namedQuery(db, 'latest-tls-query')
+  const querySnapshot = await getDocsFromCache(query)
   return querySnapshot.docs.map((doc) => doc.data()) as DBTLDataType[]
 }
