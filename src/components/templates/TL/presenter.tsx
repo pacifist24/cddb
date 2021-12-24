@@ -10,7 +10,7 @@ import CommentInput from 'components/organizms/TL/CommentInput'
 import UBsInput from 'components/organizms/TL/UBsInput'
 import SaveTLToFavsButton from 'components/organizms/TL/SaveTLToFavsButton'
 import OperationTypeInput from 'components/organizms/TL/OperationTypeInput'
-import SaveTLToServer from 'components/organizms/TL/SaveTLToServer'
+import SaveTLToServerButton from 'components/organizms/TL/SaveTLToServerButton'
 
 const Presenter: VFC = () => (
   <Column>
@@ -46,7 +46,7 @@ const Presenter: VFC = () => (
         <SaveTLToFavsButton />
       </div>
       <div className="mt-3">
-        <SaveTLToServer />
+        <SaveTLToServerButton />
       </div>
     </div>
   </Column>

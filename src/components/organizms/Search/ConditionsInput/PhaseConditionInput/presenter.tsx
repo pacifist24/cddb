@@ -12,14 +12,16 @@ type Props = {
 const PhaseConditionInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
     <FormLabel component="legend">段階:</FormLabel>
-    <SelectInput
-      value={value}
-      onChange={onChange}
-      label="段階"
-      disabled={disabled}
-      items={items}
-      className="w-32 ml-3"
-    />
+    <div className="ml-3">
+      <SelectInput
+        value={value}
+        onChange={onChange}
+        label="段階"
+        disabled={disabled}
+        items={items}
+        className="w-32"
+      />
+    </div>
   </div>
 )
 

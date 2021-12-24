@@ -12,16 +12,18 @@ type Props = {
 const DamageConditionInput: VFC<Props> = ({ value, onChange, disabled }) => (
   <div className="flex items-center">
     <FormLabel component="legend">ダメージ:</FormLabel>
-    <NumberInput
-      value={value}
-      label="ダメージ"
-      onChange={onChange}
-      disabled={disabled}
-      className="w-24 ml-3"
-      min={0}
-      max={MAX_DAMAGE}
-      step={100}
-    />
+    <div className="ml-3">
+      <NumberInput
+        value={value}
+        label="ダメージ"
+        onChange={onChange}
+        disabled={disabled}
+        className="w-24"
+        min={0}
+        max={MAX_DAMAGE}
+        step={100}
+      />
+    </div>
     <span className="ml-1">万以上</span>
   </div>
 )

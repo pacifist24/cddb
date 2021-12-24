@@ -6,7 +6,7 @@ type Props = {
   isDisabled: boolean
 }
 
-const SaveTLToServer: VFC<Props> = ({ onClick, isDisabled }) => (
+const SaveTLToServerButton: VFC<Props> = ({ onClick, isDisabled }) => (
   <span title={isDisabled ? 'サーバーへの投稿はtwitterログインが必要です' : ''}>
     <Button variant="contained" color="warning" onClick={onClick} disabled={isDisabled}>
       公開サーバーにTLを保存
@@ -14,4 +14,4 @@ const SaveTLToServer: VFC<Props> = ({ onClick, isDisabled }) => (
   </span>
 )
 
-export default SaveTLToServer
+export default SaveTLToServerButton

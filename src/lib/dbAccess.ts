@@ -6,10 +6,6 @@ import {
   updateDoc,
   deleteDoc,
   getDocsFromCache,
-  // collection,
-  // limit,
-  // orderBy,
-  // query,
   loadBundle,
   namedQuery,
 } from 'firebase/firestore'
