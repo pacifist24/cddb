@@ -6,28 +6,49 @@ import {
   selectCalculatedAttackNumConditions,
   selectCalculatedDoesCalcRestConditions,
 } from 'ducks/routes'
-
+import useMedia from 'use-media'
 import Presenter from './presenter'
 
 // 無限スクロールライブラリのFixedSizeListコンポーネントの要素サイズの計算用
-const calcItemSize = (attackNum: number, calcRest: boolean): number => {
+const calcItemSize = (attackNum: number, calcRest: boolean, isWide: boolean): number => {
+  if (isWide) {
+    if (attackNum === 3) {
+      if (calcRest) {
+        return 730
+      }
+      return 430
+    }
+    if (attackNum === 2) {
+      if (calcRest) {
+        return 500
+      }
+      return 300
+    }
+    if (attackNum === 1) {
+      if (calcRest) {
+        return 280
+      }
+      return 170
+    }
+    return 0
+  }
   if (attackNum === 3) {
     if (calcRest) {
-      return 730
+      return 925
     }
-    return 430
+    return 540
   }
   if (attackNum === 2) {
     if (calcRest) {
-      return 500
+      return 640
     }
-    return 300
+    return 380
   }
   if (attackNum === 1) {
     if (calcRest) {
-      return 280
+      return 350
     }
-    return 170
+    return 220
   }
   return 0
 }
@@ -37,12 +58,17 @@ const RoutesList: VFC = () => {
   const tlDic = useAppSelector(selectTLDic)
   const calculatedAttackNumConditions = useAppSelector(selectCalculatedAttackNumConditions)
   const calculatedDoesCalcRestConditions = useAppSelector(selectCalculatedDoesCalcRestConditions)
+  const isWide = useMedia({ minWidth: '1000px' })
 
   return (
     <Presenter
       routes={routes}
       tlDic={tlDic}
-      itemSize={calcItemSize(calculatedAttackNumConditions, calculatedDoesCalcRestConditions)}
+      itemSize={calcItemSize(
+        calculatedAttackNumConditions,
+        calculatedDoesCalcRestConditions,
+        isWide,
+      )}
     />
   )
 }

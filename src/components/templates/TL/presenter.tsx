@@ -39,7 +39,7 @@ const Presenter: VFC = () => (
       <div className="mt-3">
         <CommentInput />
       </div>
-      <div className="mt-6">
+      <div className="mt-6 mr-3">
         <UBsInput />
       </div>
       <div className="mt-3">

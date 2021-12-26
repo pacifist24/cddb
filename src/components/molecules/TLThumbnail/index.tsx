@@ -1,5 +1,6 @@
 import { VFC } from 'react'
 import { TLState } from 'ducks/tl'
+import useMedia from 'use-media'
 import Presenter from './presenter'
 
 type Props = {
@@ -17,6 +18,17 @@ const TLThumbnail: VFC<Props> = ({
   menuItems = [],
   favsNum = undefined,
   authorProfile = undefined,
-}) => <Presenter tl={tl} menuItems={menuItems} favsNum={favsNum} authorProfile={authorProfile} />
+}) => {
+  const isWide = useMedia({ minWidth: '1000px' })
+  return (
+    <Presenter
+      tl={tl}
+      menuItems={menuItems}
+      favsNum={favsNum}
+      authorProfile={authorProfile}
+      isWide={isWide}
+    />
+  )
+}
 
 export default TLThumbnail

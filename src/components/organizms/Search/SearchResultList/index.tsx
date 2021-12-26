@@ -8,7 +8,7 @@ import { useCommonAlertContext } from 'components/atoms/CommonAlertProvider'
 import { deleteTL } from 'lib/dbAccess'
 import { useCommonDialogContext } from 'components/atoms/CommonDialogProvider'
 import { generateTLId } from 'lib/util'
-
+import useMedia from 'use-media'
 import Presenter from './presenter'
 
 const SearchResultList: VFC = () => {
@@ -17,6 +17,8 @@ const SearchResultList: VFC = () => {
   const openAlert = useCommonAlertContext()
   const currentUser = useAuthContext().currentUser
   const openDialog = useCommonDialogContext()
+  const isWide = useMedia({ minWidth: '1000px' })
+  const itemSize = isWide ? 100 : 135
 
   const [groupName, setGroupName] = useState('')
   const [isGroupNameSelectDialogOpen, setIsGroupNameSelectDialogOpen] = useState(false)
@@ -108,6 +110,7 @@ const SearchResultList: VFC = () => {
       setIsOpen={setIsGroupNameSelectDialogOpen}
       handleClickOK={handleClickDialogOK}
       handleClickCancel={() => setIsGroupNameSelectDialogOpen(false)}
+      itemSize={itemSize}
     />
   )
 }

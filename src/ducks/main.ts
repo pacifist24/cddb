@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { AppState } from 'app/store'
 
-export type ContentType = 'tl' | 'config' | 'favs' | 'search' | 'name' | 'route'
+export type ContentType = 'tl' | 'config' | 'favs' | 'search' | 'name' | 'route' | 'output'
 
 export type MainState = {
   displayedContent: ContentType
 }
 
 const initialState: MainState = {
-  displayedContent: 'tl',
+  displayedContent: 'search',
 }
 
 export const slice = createSlice({

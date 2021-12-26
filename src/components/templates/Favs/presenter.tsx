@@ -7,8 +7,8 @@ import RemoveGroupButton from 'components/organizms/Favs/RemoveGroupButton'
 
 const Favs: VFC = () => (
   <Colmun>
-    <div className=" ml-3">
-      <div className="flex items-center justify-end mt-5 mr-8">
+    <div className="ml-3">
+      <div className="flex items-center mt-5 ml-5">
         <GroupInput />
         <AddGroupButton />
         <RemoveGroupButton />

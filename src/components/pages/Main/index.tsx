@@ -4,6 +4,7 @@ import { selectDisplayedContent } from 'ducks/main'
 import { loadStyle, selectStyle, StyleState } from 'ducks/style'
 import { FavsState, loadFavs, selectFavsAndGroupData } from 'ducks/favs'
 import { TLState, selectTL, loadTL } from 'ducks/tl'
+import useMedia from 'use-media'
 import Presenter from './presenter'
 
 const Main: VFC = () => {
@@ -49,7 +50,9 @@ const Main: VFC = () => {
     localStorage.setItem(tlLocalStrageKey, JSON.stringify(tl))
   }, [tl, tlLocalStrageKey])
 
-  return <Presenter displayedContent={displayedContent} />
+  const isWide = useMedia({ minWidth: '1000px' })
+
+  return <Presenter displayedContent={displayedContent} isWide={isWide} />
 }
 
 export default Main

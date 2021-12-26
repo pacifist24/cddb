@@ -12,10 +12,10 @@ const TimeRequredUpperInput: VFC<Props> = ({ value, onChange, disabled, items })
   <SelectInput
     value={value}
     onChange={onChange}
-    label="バトル時間"
+    label="上限"
     disabled={disabled}
     items={items}
-    className="w-24"
+    className="w-20"
   />
 )
 

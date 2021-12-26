@@ -12,20 +12,17 @@ const CharacterCommentInput: VFC<Props> = ({
   changeCharacterComment,
   isCharactersSelected,
 }) => (
-  <div>
-    <TextField
-      label="装備状況等"
-      variant="outlined"
-      size="small"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      className="w-48"
-      value={comment}
-      onChange={(e) => changeCharacterComment(e.target.value)}
-      disabled={!isCharactersSelected}
-    />
-  </div>
+  <TextField
+    label="装備状況等"
+    variant="outlined"
+    size="small"
+    InputLabelProps={{
+      shrink: true,
+    }}
+    value={comment}
+    onChange={(e) => changeCharacterComment(e.target.value)}
+    disabled={!isCharactersSelected}
+  />
 )
 
 export default CharacterCommentInput

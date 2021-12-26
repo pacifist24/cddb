@@ -34,6 +34,7 @@ type Props = {
   handleChangeGroupName: (groupName: string) => void
   handleClickOK: () => void
   handleClickCancel: () => void
+  itemSize: number
 }
 
 const SearchResultList: VFC<Props> = ({
@@ -45,9 +46,10 @@ const SearchResultList: VFC<Props> = ({
   handleChangeGroupName,
   handleClickOK,
   handleClickCancel,
+  itemSize,
 }) => (
   <>
-    <FixedSizeList height={1000} itemCount={searchResults.length} itemSize={100} width={1000}>
+    <FixedSizeList height={1000} itemCount={searchResults.length} itemSize={itemSize} width={1000}>
       {renderRow(searchResults, makeManuItems)}
     </FixedSizeList>
     <SaveGroupSelectDialog

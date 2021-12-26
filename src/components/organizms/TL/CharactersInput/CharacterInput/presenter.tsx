@@ -53,7 +53,7 @@ const CharacterInput: VFC<Props> = ({
       changeCharacterLv={handleChangeCharacterLv}
       isCharactersSelected={isCharactersSelected}
     />
-    <div className="ml-2">
+    <div className="flex-1 mr-3">
       <CharacterCommentInput
         comment={character.comment}
         changeCharacterComment={handleChangeCharacterComment}

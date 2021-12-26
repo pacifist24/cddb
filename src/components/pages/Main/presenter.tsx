@@ -10,16 +10,32 @@ import Search from 'components/templates/Search'
 import TLOutputText from 'components/templates/TLOutputText'
 import AttackRoute from 'components/templates/Routes'
 import { ContentType } from 'ducks/main'
-import { isMobile } from 'react-device-detect'
+import Header from 'components/templates/Header'
 
 type Props = {
   displayedContent: ContentType
+  isWide: boolean
 }
 
-const Main: VFC<Props> = ({ displayedContent }) => (
+const Main: VFC<Props> = ({ displayedContent, isWide }) => (
   <>
-    {isMobile && <div>モバイル端末対応は今後、TL編集機能を制限して実装予定です</div>}
-    {!isMobile && (
+    {!isWide && (
+      <div className="w-screen">
+        <div className="relative top-0 left-0 z-10 flex items-center flex-none h-10 py-3 pl-5 border-b space-x-4">
+          <Header />
+        </div>
+        <div className="fixed left-0 w-screen top-10">
+          {displayedContent === 'search' && <Search />}
+          {displayedContent === 'tl' && <TL />}
+          {displayedContent === 'favs' && <Favs />}
+          {displayedContent === 'route' && <AttackRoute />}
+          {displayedContent === 'name' && <CharacterNameConverter />}
+          {displayedContent === 'config' && <Config />}
+          {displayedContent === 'output' && !isWide && <TLOutputText />}
+        </div>
+      </div>
+    )}
+    {isWide && (
       <SplitPane split="vertical">
         <Pane initialSize="240px">
           <Sidebar />
