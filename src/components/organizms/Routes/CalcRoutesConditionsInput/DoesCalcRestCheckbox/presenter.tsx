@@ -15,7 +15,7 @@ const DoesCalcRestCheckbox: VFC<Props> = ({ doesCalcRest, toggleDoesCalcRest }) 
     <FormGroup>
       <FormControlLabel
         control={<Checkbox checked={doesCalcRest} onChange={toggleDoesCalcRest} />}
-        label="持ち越し凸有り（TL数が多いと重いので注意）"
+        label="持ち越し凸有り（重いので注意）"
         className="ml-1"
       />
     </FormGroup>

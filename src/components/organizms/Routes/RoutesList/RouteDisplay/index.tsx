@@ -25,7 +25,7 @@ const RouteDisplay: VFC<Props> = ({ route, tlDic }) => {
   const [groupName, setGroupName] = useState('')
   const [isGroupNameSelectDialogOpen, setIsGroupNameSelectDialogOpen] = useState(false)
   const [targetTL, setTargetTL] = useState<TLState>(undefined)
-  const isWide = useMedia({ minWidth: '1000px' })
+  const isWide = useMedia({ minWidth: '500px' })
 
   const handleClickDialogOK = () => {
     dispatch(addFav({ targetTLId: generateTLId(), tl: targetTL, group: groupName }))

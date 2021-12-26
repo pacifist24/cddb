@@ -26,18 +26,16 @@ const SortConditionRadio: VFC<Props> = ({
     <FormGroup>
       <div className="flex">
         <FormControlLabel
-          control={<Checkbox checked={allowFullAuto} onChange={toggleAllowFullAuto} />}
+          control={<Checkbox size="small" checked={allowFullAuto} onChange={toggleAllowFullAuto} />}
           label="フルオート"
         />
         <FormControlLabel
-          control={<Checkbox checked={allowSemiAuto} onChange={toggleAllowSemiAuto} />}
+          control={<Checkbox size="small" checked={allowSemiAuto} onChange={toggleAllowSemiAuto} />}
           label="セミオート"
-          className="ml-1"
         />
         <FormControlLabel
-          control={<Checkbox checked={allowManual} onChange={toggleAllowManual} />}
+          control={<Checkbox size="small" checked={allowManual} onChange={toggleAllowManual} />}
           label="手動"
-          className="ml-1"
         />
       </div>
     </FormGroup>

@@ -58,7 +58,7 @@ const RoutesList: VFC = () => {
   const tlDic = useAppSelector(selectTLDic)
   const calculatedAttackNumConditions = useAppSelector(selectCalculatedAttackNumConditions)
   const calculatedDoesCalcRestConditions = useAppSelector(selectCalculatedDoesCalcRestConditions)
-  const isWide = useMedia({ minWidth: '1000px' })
+  const isWide = useMedia({ minWidth: '500px' })
 
   return (
     <Presenter

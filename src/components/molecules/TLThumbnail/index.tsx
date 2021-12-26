@@ -19,7 +19,7 @@ const TLThumbnail: VFC<Props> = ({
   favsNum = undefined,
   authorProfile = undefined,
 }) => {
-  const isWide = useMedia({ minWidth: '1000px' })
+  const isWide = useMedia({ minWidth: '500px' })
   return (
     <Presenter
       tl={tl}

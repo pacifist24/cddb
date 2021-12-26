@@ -17,7 +17,7 @@ const SearchResultList: VFC = () => {
   const openAlert = useCommonAlertContext()
   const currentUser = useAuthContext().currentUser
   const openDialog = useCommonDialogContext()
-  const isWide = useMedia({ minWidth: '1000px' })
+  const isWide = useMedia({ minWidth: '500px' })
   const itemSize = isWide ? 100 : 135
 
   const [groupName, setGroupName] = useState('')

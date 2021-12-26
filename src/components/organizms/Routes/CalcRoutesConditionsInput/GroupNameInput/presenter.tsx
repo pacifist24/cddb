@@ -11,7 +11,7 @@ type Props = {
 
 const GroupNameInput: VFC<Props> = ({ value, onChange, disabled, items }) => (
   <div className="flex items-center">
-    <FormLabel component="legend">検索対象グループ名:</FormLabel>
+    <FormLabel component="legend">対象グループ:</FormLabel>
     <div className="ml-3">
       <SelectInput
         value={value}
