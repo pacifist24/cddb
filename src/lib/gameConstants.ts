@@ -87,6 +87,12 @@ export const CHARACTERS_INFO: {
     hasSpecial: true,
     defaultShortName: 'オウカ',
   },
+  'クウカ（ノワール）': {
+    maxStar: 5,
+    position: 143,
+    hasSpecial: false,
+    defaultShortName: 'ノウカ',
+  },
   カオリ: {
     maxStar: 6,
     position: 145,
