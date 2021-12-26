@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    siteUrl: 'https://tl-formatter.vercel.app/',
+    siteUrl: 'https://cddb.vercel.app/',
     version: '1.0.0',
   },
   i18n: {
