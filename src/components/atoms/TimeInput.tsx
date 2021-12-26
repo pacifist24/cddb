@@ -17,7 +17,7 @@ const TimeInput: VFC<Props> = ({
   <select
     value={time}
     onChange={(e) => changeTime(parseInt(e.target.value, 10))}
-    className="appearance-none focus:outline-none"
+    className="bg-transparent appearance-none focus:outline-none"
   >
     {Array.from(Array(upperBound - lowerBound + 1).keys())
       .map((val) => (

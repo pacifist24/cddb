@@ -1,16 +1,12 @@
 import { FC } from 'react'
 import useMedia from 'use-media'
-import clsx from 'clsx'
 
 const Column: FC = ({ children }) => {
   const isWide = useMedia({ minWidth: '1000px' })
   return (
-    <div
-      className={clsx('h-screen overflow-scroll overflow-x-hidden', {
-        'pb-10': !isWide,
-      })}
-    >
+    <div className="h-screen overflow-scroll overflow-x-hidden">
       {children}
+      {!isWide && <div className="h-10 text-transparent">パディング</div>}
     </div>
   )
 }
