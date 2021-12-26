@@ -25,16 +25,16 @@ const Presenter: VFC<Props> = ({ displayedContent, handleChangeDisplayedContent,
       <div className="flex justify-center w-11/12">
         <List>
           <SidebarMenuLink
-            linkIcon={<EditIcon />}
-            linkLabel="TL編集"
-            isSelected={displayedContent === 'tl'}
-            handleChangeDisplayedContent={() => handleChangeDisplayedContent('tl')}
-          />
-          <SidebarMenuLink
             linkIcon={<SearchIcon />}
             linkLabel="TL検索"
             isSelected={displayedContent === 'search'}
             handleChangeDisplayedContent={() => handleChangeDisplayedContent('search')}
+          />
+          <SidebarMenuLink
+            linkIcon={<EditIcon />}
+            linkLabel="TL編集"
+            isSelected={displayedContent === 'tl'}
+            handleChangeDisplayedContent={() => handleChangeDisplayedContent('tl')}
           />
           <SidebarMenuLink
             linkIcon={<StarBorderIcon />}

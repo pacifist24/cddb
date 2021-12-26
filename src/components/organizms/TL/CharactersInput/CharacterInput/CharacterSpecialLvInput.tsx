@@ -13,7 +13,7 @@ const CharacterSpecialLvInput: VFC<Props> = ({
   isCharactersSelected,
 }) => (
   <select
-    className="p-1 text-gray-600 appearance-none focus:outline-none"
+    className="p-1 text-gray-600 bg-transparent appearance-none focus:outline-none"
     value={specialLv}
     onChange={(val) => changeCharacterSpecialLv(parseInt(val.target.value, 10))}
     disabled={!isCharactersSelected}

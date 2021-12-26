@@ -9,7 +9,7 @@ type Props = {
 
 const CharacterLvInput: VFC<Props> = ({ lv, changeCharacterLv, isCharactersSelected }) => (
   <select
-    className="p-1 text-gray-600 appearance-none focus:outline-none"
+    className="p-1 text-gray-600 bg-transparent appearance-none focus:outline-none"
     value={lv}
     onChange={(val) => changeCharacterLv(parseInt(val.target.value, 10))}
     disabled={!isCharactersSelected}

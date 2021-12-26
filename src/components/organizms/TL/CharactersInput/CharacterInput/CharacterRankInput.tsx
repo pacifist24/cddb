@@ -9,7 +9,7 @@ type Props = {
 
 const CharacterRankInput: VFC<Props> = ({ rank, changeCharacterRank, isCharactersSelected }) => (
   <select
-    className="p-1 text-gray-600 appearance-none focus:outline-none"
+    className="p-1 text-gray-600 bg-transparent appearance-none focus:outline-none"
     value={rank}
     onChange={(val) => changeCharacterRank(parseInt(val.target.value, 10))}
     disabled={!isCharactersSelected}
