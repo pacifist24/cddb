@@ -6,7 +6,7 @@ const Column: FC = ({ children }) => {
   return (
     <div className="h-screen overflow-scroll overflow-x-hidden">
       {children}
-      {!isWide && <div className="h-10 text-transparent">パディング</div>}
+      {!isWide && <div className="text-transparent h-28">パディング</div>}
     </div>
   )
 }
