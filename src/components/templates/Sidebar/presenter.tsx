@@ -19,8 +19,11 @@ type Props = {
 }
 
 const Presenter: VFC<Props> = ({ displayedContent, handleChangeDisplayedContent, isWide }) => (
-  <div className="h-screen overflow-scroll overflow-x-hidden">
-    <div className="flex flex-col items-center justify-between h-screen">
+  <div className=" overflow-scroll overflow-x-hidden">
+    <div
+      className="flex flex-col items-center justify-between h-screen"
+      style={{ height: isWide ? '100vh' : 'calc(100vh - 2.5rem)' }}
+    >
       <div className="flex justify-center w-11/12">
         <List>
           <SidebarMenuLink
