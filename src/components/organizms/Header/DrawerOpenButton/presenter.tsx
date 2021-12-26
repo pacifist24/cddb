@@ -1,5 +1,5 @@
 import { VFC, KeyboardEvent, MouseEvent } from 'react'
-import Drawer from '@mui/material/Drawer'
+import SwipeableDrawer from '@mui/material/Drawer'
 import DrawerContents from 'components/organizms/Header/DrawerContents'
 
 type Props = {
@@ -26,9 +26,9 @@ const DrawerOpenButton: VFC<Props> = ({ onClick, isDrawerOpen, toggleDrawer }) =
         />
       </svg>
     </button>
-    <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+    <SwipeableDrawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
       <DrawerContents toggleDrawer={toggleDrawer} />
-    </Drawer>
+    </SwipeableDrawer>
   </>
 )
 
