@@ -1,6 +1,5 @@
 import { VFC } from 'react'
 import { ContentType } from 'ducks/main'
-import Colmun from 'components/atoms/Column'
 import { List } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import SidebarMenuLink from 'components/organizms/Sidebar/SidebarMenuLink'
@@ -20,7 +19,7 @@ type Props = {
 }
 
 const Presenter: VFC<Props> = ({ displayedContent, handleChangeDisplayedContent, isWide }) => (
-  <Colmun>
+  <div className="h-screen overflow-scroll overflow-x-hidden">
     <div className="flex flex-col items-center justify-between h-screen">
       <div className="flex justify-center w-11/12">
         <List>
@@ -75,7 +74,7 @@ const Presenter: VFC<Props> = ({ displayedContent, handleChangeDisplayedContent,
         <LoginButton />
       </div>
     </div>
-  </Colmun>
+  </div>
 )
 
 export default Presenter
