@@ -1,5 +1,5 @@
-export const MAX_RANK = 22
-export const MAX_LV = 211
+export const MAX_RANK = 23
+export const MAX_LV = 220
 export const MAX_SPECIAL_LV = 220
 export const MAX_STAR = 6
 export const MAX_PHASE = 5
@@ -95,13 +95,13 @@ export const CHARACTERS_INFO: {
   'サレン（クリスマス）': {
     maxStar: 5,
     position: 150,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'クリサレ',
   },
   'ツムギ（ハロウィン）': {
     maxStar: 5,
     position: 152,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'ハロツム',
   },
   'レイ（ニューイヤー）': {
@@ -249,7 +249,7 @@ export const CHARACTERS_INFO: {
   'アキノ（クリスマス）': {
     maxStar: 5,
     position: 189,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'クリアキノ',
   },
   'アヤネ（クリスマス）': {
@@ -413,6 +413,12 @@ export const CHARACTERS_INFO: {
     hasSpecial: true,
     defaultShortName: 'クリクルミ',
   },
+  'ミヤコ（クリスマス）': {
+    maxStar: 5,
+    position: 302,
+    hasSpecial: false,
+    defaultShortName: 'クリミヤコ',
+  },
   'ツムギ（サマー）': {
     maxStar: 5,
     position: 355,
@@ -475,10 +481,16 @@ export const CHARACTERS_INFO: {
     position: 395,
     hasSpecial: true,
   },
+  'マヒル（クリスマス）': {
+    maxStar: 5,
+    position: 397,
+    hasSpecial: false,
+    defaultShortName: 'クリマヒル',
+  },
   'トモ（マジカル）': {
     maxStar: 5,
     position: 402,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'ニートモ',
   },
   ユカリ: {
@@ -495,11 +507,11 @@ export const CHARACTERS_INFO: {
   'ユカリ（クリスマス）': {
     maxStar: 5,
     position: 408,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'Xユカリ',
   },
   モニカ: {
-    maxStar: 5,
+    maxStar: 6,
     position: 410,
     hasSpecial: true,
   },
@@ -611,7 +623,7 @@ export const CHARACTERS_INFO: {
   'モニカ（マジカル）': {
     maxStar: 5,
     position: 528,
-    hasSpecial: false,
+    hasSpecial: true,
     defaultShortName: 'ラブモニ',
   },
   'アカリ（エンジェル）': {
@@ -717,7 +729,7 @@ export const CHARACTERS_INFO: {
     defaultShortName: 'ハロプリン',
   },
   アリサ: {
-    maxStar: 5,
+    maxStar: 6,
     position: 625,
     hasSpecial: true,
   },
@@ -792,6 +804,12 @@ export const CHARACTERS_INFO: {
     position: 712,
     hasSpecial: true,
     defaultShortName: 'マオリ',
+  },
+  'イオ（ノワール）': {
+    maxStar: 5,
+    position: 714,
+    hasSpecial: false,
+    defaultShortName: 'イオノワ',
   },
   イオ: {
     maxStar: 5,
@@ -901,6 +919,11 @@ export const CHARACTERS_INFO: {
     position: 761,
     hasSpecial: false,
   },
+  'リノ（クリスマス）': {
+    maxStar: 5,
+    position: 762,
+    hasSpecial: false,
+  },
   ルナ: {
     maxStar: 5,
     position: 765,
@@ -982,7 +1005,7 @@ export const CHARACTERS_INFO: {
     hasSpecial: true,
   },
   'ミサキ（ハロウィン）': {
-    maxStar: 5,
+    maxStar: 6,
     position: 815,
     hasSpecial: true,
     defaultShortName: 'ハロミサ',
@@ -994,6 +1017,3 @@ export const CHARACTERS_INFO: {
     defaultShortName: 'ハロキョ',
   },
 }
-
-// console.log(JSON.stringify(CHARACTERS_INFO));
-// console.log(Object.keys(CHARACTERS_INFO).length);

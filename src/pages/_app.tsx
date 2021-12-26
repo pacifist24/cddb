@@ -1,4 +1,5 @@
 import 'styles/globals.css'
+import { VFC } from 'react'
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { AuthProvider } from 'app/AuthContext'
@@ -7,7 +8,7 @@ import { CommonAlertProvider } from 'components/atoms/CommonAlertProvider'
 import Head from 'next/head'
 import store from 'app/store'
 
-const MyApp: React.VFC = ({ Component, pageProps }: AppProps) => (
+const MyApp: VFC = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <title>クラバトDB</title>
